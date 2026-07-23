@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Forno Rosso - Premium Italian Pizza Restaurant. Handcrafted wood-fired pizzas made with the freshest ingredients. Order online for delivery or dine-in.">
+    <meta name="keywords" content="pizza, Italian restaurant, wood-fired pizza, delivery, premium pizza, handmade pizza">
+    <meta name="author" content="Forno Rosso">
+    <title>Forno Rosso — Premium Italian Pizza</title>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ========== NAVIGATION (Sweetgreen-inspired) ========== -->
+    <header class="navbar" id="navbar">
+        <div class="navbar__container">
+            <!-- Left: 2-line Pill Hamburger -->
+            <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Center: Clean Brand Logo -->
+            <a href="#hero" class="navbar__logo">
+                <span class="navbar__logo-text">forno rosso.</span>
+            </a>
+
+            <!-- Right Actions: Heart + Place order -->
+            <div class="navbar__actions">
+                <button class="navbar__fav" aria-label="Favorites">♡</button>
+                <a href="#menu" class="navbar__order-btn">Place the order</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Scrollable Full-screen Navigation Overlay -->
+    <div class="navbar__menu" id="navMenu" aria-hidden="true">
+        <nav class="navbar__menu-inner">
+            <a href="#hero" class="navbar__menu-link">Home</a>
+            <a href="#offers" class="navbar__menu-link">Offers</a>
+            <a href="#about" class="navbar__menu-link">About</a>
+            <a href="#menu" class="navbar__menu-link">Menu</a>
+            <a href="#reservation" class="navbar__menu-link">Reservation</a>
+            <a href="#gallery" class="navbar__menu-link">Gallery</a>
+            <a href="#contact" class="navbar__menu-link">Contact</a>
+        </nav>
+    </div>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="hero">
+        <!-- Background Moving Ticker Marquee (30 deg angle, large font) -->
+        <div class="hero__ticker">
+            <div class="hero__ticker-track">
+                <span class="hero__ticker-item">FOOD DELIVERY</span>
+                <span class="hero__ticker-item hero__ticker-item--outline">FOOD DELIVERY</span>
+                <span class="hero__ticker-item">WOOD FIRED</span>
+                <span class="hero__ticker-item hero__ticker-item--outline">ARTISAN PIZZA</span>
+                <span class="hero__ticker-item">FOOD DELIVERY</span>
+                <span class="hero__ticker-item hero__ticker-item--outline">FOOD DELIVERY</span>
+                <span class="hero__ticker-item">WOOD FIRED</span>
+                <span class="hero__ticker-item hero__ticker-item--outline">ARTISAN PIZZA</span>
+            </div>
+        </div>
+
+        <!-- Center Stadium/Capsule Image Container -->
+        <div class="hero__stadium-wrapper">
+            <div class="hero__stadium">
+                <img src="images/hero-pizza.jpg" alt="Artisan Italian Pizza" class="hero__stadium-img">
+                <a href="#menu" class="hero__scroll-badge">
+                    <span>Scroll</span>
+                    <span>To Explore</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SPECIAL OFFERS SECTION ========== -->
+    <section class="offers" id="offers">
+        <div class="container">
+            <div class="section-header section-header--light reveal">
+                <span class="section-tag">Limited Time</span>
+                <h2 class="section-title">Exclusive Special Offers</h2>
+                <p class="section-subtitle">Grab these incredible deals before the timer runs out!</p>
+            </div>
+
+            <div class="offers__carousel reveal">
+                <div class="offers__track" id="offersTrack">
+                    <!-- Offer cards rendered dynamically by JS -->
+                </div>
+                <div class="offers__nav">
+                    <button class="offers__nav-btn" id="offersPrev" aria-label="Previous offer">←</button>
+                    <div class="offers__dots" id="offersDots"></div>
+                    <button class="offers__nav-btn" id="offersNext" aria-label="Next offer">→</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT & STORY TIMELINE SECTION (Feature #6) ========== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about__grid">
+                <div class="about__image-wrapper reveal">
+                    <img src="images/about-restaurant.jpg" alt="Inside Forno Rosso restaurant" loading="lazy">
+                    <div class="about__image-badge">
+                        <span class="about__image-badge-number">15+</span>
+                        <span class="about__image-badge-text">Years of Culinary Excellence</span>
+                    </div>
+                </div>
+                <div class="about__content reveal">
+                    <span class="section-tag">Our Journey</span>
+                    <h2 class="section-title">Traditional Recipes, Modern Passion</h2>
+                    <p class="about__text">
+                        Forno Rosso brings the authentic taste of Naples to your table. Explore our timeline of culinary craftsmanship below.
+                    </p>
+
+                    <!-- Story Timeline Animation -->
+                    <div class="story-timeline" id="storyTimeline">
+                        <div class="story-timeline__progress" id="timelineProgress"></div>
+
+                        <div class="timeline-node">
+                            <div class="timeline-node__dot"></div>
+                            <span class="timeline-node__year">2011</span>
+                            <h4 class="timeline-node__title">The Beginning in Naples</h4>
+                            <p class="timeline-node__desc">Started with a single traditional wood-fired stone oven and a family recipe passed down through generations.</p>
+                        </div>
+
+                        <div class="timeline-node">
+                            <div class="timeline-node__dot"></div>
+                            <span class="timeline-node__year">2015</span>
+                            <h4 class="timeline-node__title">48-Hour Fermentation Mastery</h4>
+                            <p class="timeline-node__desc">Perfected our signature sourdough dough fermentation technique for maximum digestability and crispness.</p>
+                        </div>
+
+                        <div class="timeline-node">
+                            <div class="timeline-node__dot"></div>
+                            <span class="timeline-node__year">2019</span>
+                            <h4 class="timeline-node__title">Flagship Restaurant Opening</h4>
+                            <p class="timeline-node__desc">Opened our flagship dining space bringing genuine Italian imports, volcanic soil tomatoes, and fresh mozzarella.</p>
+                        </div>
+
+                        <div class="timeline-node">
+                            <div class="timeline-node__dot"></div>
+                            <span class="timeline-node__year">2026</span>
+                            <h4 class="timeline-node__title">Awarded #1 Artisan Pizzeria</h4>
+                            <p class="timeline-node__desc">Recognized as the top wood-fired pizzeria, delivering over 50,000 artisan pizzas to happy guests.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MENU SECTION ========== -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Handcrafted Menu</span>
+                <h2 class="section-title">Popular Pizzas</h2>
+                <p class="section-subtitle">Every pizza is handcrafted to order and baked in our wood-fired oven.</p>
+            </div>
+            <div class="menu__grid" id="menuGrid">
+                <!-- Food cards rendered dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== RESERVATION SECTION ========== -->
+    <section class="reservation" id="reservation">
+        <div class="container">
+            <div class="reservation__card reveal">
+                <h2 class="reservation__title">Reservation</h2>
+                <form class="reservation__form" id="reservationForm">
+                    <div class="reservation__field">
+                        <span class="reservation__label">Date</span>
+                        <input type="date" id="resDate" class="reservation__input" value="2026-10-15" required>
+                    </div>
+                    <div class="reservation__field">
+                        <span class="reservation__label">Time</span>
+                        <input type="time" id="resTime" class="reservation__input" value="20:00" required>
+                    </div>
+                    <div class="reservation__field">
+                        <span class="reservation__label">Guests</span>
+                        <select id="resGuests" class="reservation__select" required>
+                            <option value="1">1 Person</option>
+                            <option value="2" selected>2 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="6">6 Guests</option>
+                            <option value="8">8+ Guests</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="reservation__btn">Reserve a table</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ACCORDION GALLERY SECTION ========== -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Visual Experience</span>
+                <h2 class="section-title">Gallery</h2>
+                <p class="section-subtitle">Hover or click to explore our kitchen and atmosphere.</p>
+            </div>
+            <div class="gallery__accordion reveal" id="galleryAccordion">
+                <div class="gallery__strip active">
+                    <img src="images/gallery-1.jpg" alt="Handcrafted Dough" class="gallery__strip-img" loading="lazy">
+                    <div class="gallery__strip-overlay">
+                        <h3 class="gallery__strip-title">Handcrafted Dough</h3>
+                    </div>
+                </div>
+                <div class="gallery__strip">
+                    <img src="images/gallery-2.jpg" alt="Wood-Fired Oven" class="gallery__strip-img" loading="lazy">
+                    <div class="gallery__strip-overlay">
+                        <h3 class="gallery__strip-title">Wood-Fired Oven</h3>
+                    </div>
+                </div>
+                <div class="gallery__strip">
+                    <img src="images/gallery-3.jpg" alt="Fresh Ingredients" class="gallery__strip-img" loading="lazy">
+                    <div class="gallery__strip-overlay">
+                        <h3 class="gallery__strip-title">Fresh Ingredients</h3>
+                    </div>
+                </div>
+                <div class="gallery__strip">
+                    <img src="images/gallery-4.jpg" alt="Mozzarella Pull" class="gallery__strip-img" loading="lazy">
+                    <div class="gallery__strip-overlay">
+                        <h3 class="gallery__strip-title">Mozzarella Pull</h3>
+                    </div>
+                </div>
+                <div class="gallery__strip">
+                    <img src="images/gallery-5.jpg" alt="Dining Atmosphere" class="gallery__strip-img" loading="lazy">
+                    <div class="gallery__strip-overlay">
+                        <h3 class="gallery__strip-title">Dining Atmosphere</h3>
+                    </div>
+                </div>
+                <div class="gallery__strip">
+                    <img src="images/gallery-6.jpg" alt="Garlic Bread" class="gallery__strip-img" loading="lazy">
+                    <div class="gallery__strip-overlay">
+                        <h3 class="gallery__strip-title">Garlic Bread</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY CHOOSE US ========== -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Why Forno Rosso</span>
+                <h2 class="section-title">The Forno Rosso Difference</h2>
+                <p class="section-subtitle">What sets our artisan pizzas apart from ordinary pizza places.</p>
+            </div>
+            <div class="features__grid">
+                <div class="feature-card reveal">
+                    <div class="feature-card__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">Artisan Ingredients</h3>
+                    <p class="feature-card__text">Only the finest imported Italian tomatoes, cheeses, and cold-pressed oils.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-card__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">No Preservatives</h3>
+                    <p class="feature-card__text">100% natural, fresh ingredients prepared daily in our kitchen.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-card__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">30-Min Delivery</h3>
+                    <p class="feature-card__text">Piping hot pizza delivered to your door in 30 minutes or it's free.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-card__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">Made with Love</h3>
+                    <p class="feature-card__text">Every crust is hand-stretched with care by master pizzaiolos.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-card__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">5-Star Rated</h3>
+                    <p class="feature-card__text">Consistently rated the best pizzeria by food critics and customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== REVIEWS SECTION ========== -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">What Our Guests Say</h2>
+                <p class="section-subtitle">Real reviews from our valued pizza lovers.</p>
+            </div>
+            <div class="reviews__slider reveal">
+                <div class="reviews__track" id="reviewsTrack">
+                    <!-- Testimonials rendered dynamically by JS -->
+                </div>
+                <div class="reviews__nav">
+                    <button class="reviews__nav-btn" id="reviewsPrev" aria-label="Previous review">←</button>
+                    <div class="reviews__dots" id="reviewsDots"></div>
+                    <button class="reviews__nav-btn" id="reviewsNext" aria-label="Next review">→</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION ========== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Get in Touch</span>
+                <h2 class="section-title">Visit Us or Order Online</h2>
+                <p class="section-subtitle">Have questions or want to make a reservation? Reach out to us.</p>
+            </div>
+            <div class="contact__grid">
+                <div class="contact__form-wrapper reveal">
+                    <form class="contact__form" id="contactForm">
+                        <div class="form-group">
+                            <label for="contactName" class="form-label">Full Name</label>
+                            <input type="text" id="contactName" class="form-input" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail" class="form-label">Email Address</label>
+                            <input type="email" id="contactEmail" class="form-input" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage" class="form-label">Message</label>
+                            <textarea id="contactMessage" class="form-input form-textarea" rows="4" placeholder="Tell us what you're looking for..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--lg btn--full">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                <div class="contact__info reveal">
+                    <div class="contact__info-card">
+                        <div class="contact__info-item">
+                            <div class="contact__info-icon">📍</div>
+                            <div>
+                                <h4>Our Address</h4>
+                                <p>42 Via Roma, Connaught Place<br>New Delhi, India 110001</p>
+                            </div>
+                        </div>
+                        <div class="contact__info-item">
+                            <div class="contact__info-icon">📞</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 98765 43210<br>+91 11 2345 6789</p>
+                            </div>
+                        </div>
+                        <div class="contact__info-item">
+                            <div class="contact__info-icon">✉️</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>hello@fornorosso.com<br>orders@fornorosso.com</p>
+                            </div>
+                        </div>
+                        <div class="contact__info-item">
+                            <div class="contact__info-icon">⏰</div>
+                            <div>
+                                <h4>Hours</h4>
+                                <p>Mon-Fri: 11:00 AM - 11:00 PM<br>Sat-Sun: 10:00 AM - 12:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact__map">
+                        <div class="contact__map-placeholder">
+                            <p>Interactive Map</p>
+                            <span>42 Via Roma, Connaught Place, New Delhi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div>
+                    <a href="#hero" class="footer__logo">
+                        <span class="navbar__logo-text">forno rosso.</span>
+                    </a>
+                    <p class="footer__tagline">Crafting authentic Italian wood-fired pizzas with passion and premium ingredients since 2011.</p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link" aria-label="Facebook">fb</a>
+                        <a href="#" class="footer__social-link" aria-label="Instagram">ig</a>
+                        <a href="#" class="footer__social-link" aria-label="Twitter">tw</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer__links-title">Quick Links</h4>
+                    <ul class="footer__links">
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#offers">Special Offers</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Our Menu</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__links-title">Support</h4>
+                    <ul class="footer__links">
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="admin.html">Admin Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__links-title">Opening Hours</h4>
+                    <ul class="footer__links">
+                        <li>Mon - Fri: 11am - 11pm</li>
+                        <li>Sat - Sun: 10am - 12am</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Forno Rosso. All rights reserved.</p>
+                <div class="footer__bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
