@@ -61,7 +61,7 @@
 
     /* Typography Tokens */
     --ff-primary: 'SuisseIntl', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --ff-secondary: 'Canela', Georgia, serif;
+    --ff-secondary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
     --ff-heading: var(--ff-primary);
     --ff-body: var(--ff-secondary);
