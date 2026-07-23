@@ -350,17 +350,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
+    function closeMobileNav() {
+        if (!hamburgerBtn || !navMenu) return;
+        hamburgerBtn.classList.remove('active');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = '';
+        if (window.innerWidth <= 768) {
+            navMenu.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    function openMobileNav() {
+        if (!hamburgerBtn || !navMenu) return;
+        hamburgerBtn.classList.add('active');
+        hamburgerBtn.setAttribute('aria-expanded', 'true');
+        navMenu.classList.add('active');
+        navMenu.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
     if (hamburgerBtn && navMenu) {
         hamburgerBtn.addEventListener('click', () => {
-            const active = navMenu.classList.toggle('active');
-            hamburgerBtn.setAttribute('aria-expanded', active);
+            const isOpen = navMenu.classList.contains('active');
+            if (isOpen) {
+                closeMobileNav();
+            } else {
+                openMobileNav();
+            }
         });
 
         navMenu.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                closeMobileNav();
             });
+        });
+
+        // Close mobile nav on window resize if scaled up to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.body.style.overflow = '';
+                navMenu.setAttribute('aria-hidden', 'false');
+                hamburgerBtn.classList.remove('active');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
+            } else if (!navMenu.classList.contains('active')) {
+                navMenu.setAttribute('aria-hidden', 'true');
+            }
         });
     }
 
