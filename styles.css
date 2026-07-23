@@ -229,8 +229,10 @@ h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 }
 .navbar.scrolled {
     background: rgba(243, 240, 231, 0.96);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(42, 37, 41, 0.08);
+    box-shadow: 0 4px 24px rgba(42, 37, 41, 0.06);
 }
 
 .navbar__container {
@@ -397,7 +399,7 @@ h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 .hero__ticker-track {
     display: inline-flex;
     gap: 60px;
-    animation: tickerMove 25s linear infinite;
+    animation: tickerMove 40s linear infinite;
 }
 
 @keyframes tickerMove {
@@ -2068,4 +2070,534 @@ h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     .about__features { grid-template-columns: 1fr; }
     .reservation__card { padding: 28px 20px; }
     .admin__stats { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   HERO CTA GROUP
+   ============================================================ */
+.hero__cta-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 72px;
+    z-index: 3;
+}
+
+.hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: var(--radius-pill);
+    font-family: var(--ff-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+}
+
+.hero__cta--primary {
+    background: var(--color-third);
+    color: var(--color-primary);
+    box-shadow: 0 8px 28px rgba(255, 100, 0, 0.35);
+}
+
+.hero__cta--primary:hover {
+    background: #e05800;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(255, 100, 0, 0.45);
+}
+
+.hero__cta--secondary {
+    background: transparent;
+    color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+}
+
+.hero__cta--secondary:hover {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    transform: translateY(-3px);
+}
+
+/* ============================================================
+   MENU FILTER PILLS
+   ============================================================ */
+.menu__filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: sticky;
+    top: var(--nav-height);
+    z-index: 10;
+    background: var(--color-primary);
+    padding: 16px 0;
+}
+
+.menu__filter-pill {
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid rgba(42, 37, 41, 0.15);
+    background: transparent;
+    color: var(--color-secondary);
+    font-family: var(--ff-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.menu__filter-pill:hover {
+    border-color: var(--color-third);
+    color: var(--color-third);
+}
+
+.menu__filter-pill.active {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-secondary);
+}
+
+/* ============================================================
+   DIETARY BADGES ON FOOD CARDS
+   ============================================================ */
+.food-card__dietary {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.food-card__dietary-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: var(--ff-body);
+}
+
+.food-card__dietary-badge--veg {
+    background: rgba(34, 197, 94, 0.12);
+    color: #16a34a;
+}
+
+.food-card__dietary-badge--spicy {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+}
+
+.food-card__dietary-badge--gf {
+    background: rgba(234, 179, 8, 0.12);
+    color: #ca8a04;
+}
+
+/* ============================================================
+   ENHANCED RESERVATION - TIME SLOTS & GUEST COUNTER
+   ============================================================ */
+.reservation__subtitle {
+    font-family: var(--ff-heading);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+.reservation__field--time {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.reservation__time-slots {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.reservation__time-btn {
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid rgba(42, 37, 41, 0.15);
+    background: transparent;
+    color: var(--color-secondary);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.reservation__time-btn:hover {
+    border-color: var(--color-third);
+    color: var(--color-third);
+}
+
+.reservation__time-btn.active {
+    background: var(--color-third);
+    color: var(--color-primary);
+    border-color: var(--color-third);
+}
+
+.reservation__field--guests {
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.reservation__guest-counter {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.reservation__guest-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-circle);
+    border: 1.5px solid rgba(42, 37, 41, 0.2);
+    background: transparent;
+    color: var(--color-secondary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reservation__guest-btn:hover {
+    background: var(--color-third);
+    color: var(--color-primary);
+    border-color: var(--color-third);
+}
+
+.reservation__guest-count {
+    font-family: var(--ff-body);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    min-width: 28px;
+    text-align: center;
+}
+
+/* ============================================================
+   GALLERY LIGHTBOX
+   ============================================================ */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(42, 37, 41, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.lightbox__content {
+    position: relative;
+    z-index: 1;
+    max-width: 85vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox__img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: var(--radius-lg);
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.lightbox__close {
+    position: absolute;
+    top: -50px;
+    right: -10px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 1.6rem;
+    border-radius: var(--radius-circle);
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox__close:hover {
+    background: var(--color-third);
+    transform: rotate(90deg);
+}
+
+.lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 1.1rem;
+    border-radius: var(--radius-circle);
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.lightbox__nav:hover {
+    background: var(--color-third);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox__nav--prev { left: -60px; }
+.lightbox__nav--next { right: -60px; }
+
+.lightbox__caption {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   FLOATING CART BAR
+   ============================================================ */
+.cart-bar {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1500;
+    transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cart-bar.visible {
+    bottom: 24px;
+}
+
+.cart-bar__inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    padding: 14px 20px 14px 24px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 12px 40px rgba(42, 37, 41, 0.35);
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.cart-bar__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-bar__count {
+    background: var(--color-third);
+    color: var(--color-primary);
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-circle);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.cart-bar__divider {
+    opacity: 0.3;
+}
+
+.cart-bar__total {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.cart-bar__checkout {
+    background: var(--color-third);
+    color: var(--color-primary);
+    border: none;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    font-family: var(--ff-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-bar__checkout:hover {
+    background: #e05800;
+    transform: scale(1.04);
+}
+
+/* ============================================================
+   CONTACT MAP LINK
+   ============================================================ */
+.contact__map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    background: var(--color-third);
+    color: var(--color-primary);
+    font-family: var(--ff-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+.contact__map-link:hover {
+    background: #e05800;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 100, 0, 0.3);
+}
+
+/* ============================================================
+   REVIEW TRUST SIGNALS
+   ============================================================ */
+.review-card__source {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    background: rgba(42, 37, 41, 0.06);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: var(--ff-body);
+}
+
+.review-card__verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #16a34a;
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: var(--ff-body);
+}
+
+/* ============================================================
+   PREFERS REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hero__ticker-track {
+        animation: none;
+    }
+
+    .lightbox {
+        transition: none;
+    }
+
+    .cart-bar {
+        transition: none;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE ADDITIONS
+   ============================================================ */
+@media (max-width: 768px) {
+    .hero__cta-group {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 56px;
+    }
+
+    .hero__cta {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+
+    .menu__filters {
+        gap: 8px;
+        padding: 12px 0;
+    }
+
+    .menu__filter-pill {
+        padding: 8px 16px;
+        font-size: 0.78rem;
+    }
+
+    .reservation__time-slots {
+        gap: 6px;
+    }
+
+    .reservation__time-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+
+    .lightbox__nav--prev { left: 8px; }
+    .lightbox__nav--next { right: 8px; }
+    .lightbox__close { top: -44px; right: 0; }
+
+    .cart-bar__inner {
+        padding: 12px 16px;
+        font-size: 0.82rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__cta-group { margin-top: 48px; }
+    .hero__cta { padding: 14px 24px; font-size: 0.88rem; }
+    .lightbox__content { max-width: 95vw; }
 }

@@ -55,12 +55,10 @@
         <!-- Background Moving Ticker Marquee (30 deg angle, large font) -->
         <div class="hero__ticker">
             <div class="hero__ticker-track">
-                <span class="hero__ticker-item">FOOD DELIVERY</span>
-                <span class="hero__ticker-item hero__ticker-item--outline">FOOD DELIVERY</span>
                 <span class="hero__ticker-item">WOOD FIRED</span>
                 <span class="hero__ticker-item hero__ticker-item--outline">ARTISAN PIZZA</span>
-                <span class="hero__ticker-item">FOOD DELIVERY</span>
-                <span class="hero__ticker-item hero__ticker-item--outline">FOOD DELIVERY</span>
+                <span class="hero__ticker-item">AUTHENTIC ITALIAN</span>
+                <span class="hero__ticker-item hero__ticker-item--outline">FRESH DAILY</span>
                 <span class="hero__ticker-item">WOOD FIRED</span>
                 <span class="hero__ticker-item hero__ticker-item--outline">ARTISAN PIZZA</span>
             </div>
@@ -74,6 +72,10 @@
                     <span>Scroll</span>
                     <span>To Explore</span>
                 </a>
+            </div>
+            <div class="hero__cta-group">
+                <a href="#menu" class="hero__cta hero__cta--primary"><i class="fa-solid fa-bag-shopping"></i> Order Online</a>
+                <a href="#reservation" class="hero__cta hero__cta--secondary"><i class="fa-regular fa-calendar"></i> Book a Table</a>
             </div>
         </div>
     </section>
@@ -158,6 +160,13 @@
                 <h2 class="section-title">Popular Pizzas</h2>
                 <p class="section-subtitle">Every pizza is handcrafted to order and baked in our wood-fired oven.</p>
             </div>
+            <div class="menu__filters" id="menuFilters">
+                <button class="menu__filter-pill active" data-filter="all">All</button>
+                <button class="menu__filter-pill" data-filter="classic">Classic Pizzas</button>
+                <button class="menu__filter-pill" data-filter="gourmet">Gourmet</button>
+                <button class="menu__filter-pill" data-filter="veg">🌱 Vegetarian</button>
+                <button class="menu__filter-pill" data-filter="meat">🥩 Meat Lovers</button>
+            </div>
             <div class="menu__grid" id="menuGrid">
                 <!-- Food cards rendered dynamically by JS -->
             </div>
@@ -168,27 +177,35 @@
     <section class="reservation" id="reservation">
         <div class="container">
             <div class="reservation__card reveal">
-                <h2 class="reservation__title">Reservation</h2>
+                <h2 class="reservation__title">Reserve Your Table</h2>
+                <p class="reservation__subtitle">Select your preferred date, time & party size</p>
                 <form class="reservation__form" id="reservationForm">
                     <div class="reservation__field">
-                        <span class="reservation__label">Date</span>
-                        <input type="date" id="resDate" class="reservation__input" value="2026-10-15" required>
+                        <span class="reservation__label"><i class="fa-regular fa-calendar"></i> Date</span>
+                        <input type="date" id="resDate" class="reservation__input" required>
                     </div>
-                    <div class="reservation__field">
-                        <span class="reservation__label">Time</span>
-                        <input type="time" id="resTime" class="reservation__input" value="20:00" required>
+                    <div class="reservation__field reservation__field--time">
+                        <span class="reservation__label"><i class="fa-regular fa-clock"></i> Time</span>
+                        <div class="reservation__time-slots" id="resTimeSlots">
+                            <button type="button" class="reservation__time-btn" data-time="12:00">12:00 PM</button>
+                            <button type="button" class="reservation__time-btn" data-time="13:00">1:00 PM</button>
+                            <button type="button" class="reservation__time-btn" data-time="18:00">6:00 PM</button>
+                            <button type="button" class="reservation__time-btn" data-time="19:00">7:00 PM</button>
+                            <button type="button" class="reservation__time-btn active" data-time="20:00">8:00 PM</button>
+                            <button type="button" class="reservation__time-btn" data-time="21:00">9:00 PM</button>
+                        </div>
+                        <input type="hidden" id="resTime" value="20:00" required>
                     </div>
-                    <div class="reservation__field">
-                        <span class="reservation__label">Guests</span>
-                        <select id="resGuests" class="reservation__select" required>
-                            <option value="1">1 Person</option>
-                            <option value="2" selected>2 Guests</option>
-                            <option value="4">4 Guests</option>
-                            <option value="6">6 Guests</option>
-                            <option value="8">8+ Guests</option>
-                        </select>
+                    <div class="reservation__field reservation__field--guests">
+                        <span class="reservation__label"><i class="fa-solid fa-user-group"></i> Guests</span>
+                        <div class="reservation__guest-counter">
+                            <button type="button" class="reservation__guest-btn" id="guestMinus" aria-label="Decrease guests">−</button>
+                            <span class="reservation__guest-count" id="resGuestCount">2</span>
+                            <button type="button" class="reservation__guest-btn" id="guestPlus" aria-label="Increase guests">+</button>
+                        </div>
+                        <input type="hidden" id="resGuests" value="2" required>
                     </div>
-                    <button type="submit" class="reservation__btn">Reserve a table</button>
+                    <button type="submit" class="reservation__btn"><i class="fa-solid fa-check"></i> Confirm Reservation</button>
                 </form>
             </div>
         </div>
@@ -366,8 +383,12 @@
                     </div>
                     <div class="contact__map">
                         <div class="contact__map-placeholder">
+                            <i class="fa-solid fa-map-location-dot" style="font-size: 2rem; color: var(--color-third); margin-bottom: 4px;"></i>
                             <p>Interactive Map</p>
                             <span>42 Via Roma, Connaught Place, New Delhi</span>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Connaught+Place+New+Delhi+India" target="_blank" rel="noopener noreferrer" class="contact__map-link">
+                                <i class="fa-solid fa-diamond-turn-right"></i> Open in Google Maps
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -404,7 +425,8 @@
                     <ul class="footer__links">
                         <li><a href="#contact">Contact Us</a></li>
                         <li><a href="#reviews">Reviews</a></li>
-                        <li><a href="admin.html">Admin Login</a></li>
+                        <li><a href="#reservation">Reservations</a></li>
+                        <li><a href="#">FAQ</a></li>
                     </ul>
                 </div>
                 <div>
@@ -424,6 +446,31 @@
             </div>
         </div>
     </footer>
+
+    <!-- Gallery Lightbox Modal -->
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox__overlay"></div>
+        <div class="lightbox__content">
+            <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
+            <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+            <img class="lightbox__img" id="lightboxImg" src="" alt="Gallery image">
+            <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+            <p class="lightbox__caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <!-- Floating Cart Bar -->
+    <div class="cart-bar" id="cartBar" aria-hidden="true">
+        <div class="cart-bar__inner">
+            <div class="cart-bar__info">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-bar__count" id="cartCount">0</span> items
+                <span class="cart-bar__divider">|</span>
+                <span class="cart-bar__total">₹<span id="cartTotal">0</span></span>
+            </div>
+            <button class="cart-bar__checkout" id="cartCheckout"><i class="fa-solid fa-arrow-right"></i> Checkout</button>
+        </div>
+    </div>
 
     <!-- Toast Notifications Container -->
     <div class="toast-container" id="toastContainer"></div>

@@ -12,20 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const OFFERS_KEY = 'fornorosso_offers';
 
     const pizzaData = [
-        { id: 1, name: 'Pepperoni Classic', desc: 'Classic pepperoni with mozzarella and signature tomato sauce', price: 499, badge: '20% off', tags: ['Best Seller', '9 left'], img: 'images/pizza-pepperoni.jpg' },
-        { id: 2, name: 'Margherita', desc: 'Fresh basil, creamy mozzarella, San Marzano tomato sauce', price: 399, badge: '15% off', tags: ['Classic', 'Wood-Fired'], img: 'images/pizza-margherita.jpg' },
-        { id: 3, name: 'BBQ Chicken', desc: 'Grilled chicken, smoky BBQ sauce, caramelized onions', price: 549, badge: '10% off', tags: ['Chef Choice', '5 left'], img: 'images/pizza-bbq-chicken.jpg' },
-        { id: 4, name: 'Quattro Formaggi', desc: 'Four Italian cheese blend — mozzarella, gorgonzola, parmesan', price: 599, badge: '25% off', tags: ['Premium', 'Four Cheese'], img: 'images/pizza-four-cheese.jpg' },
-        { id: 5, name: 'Veggie Supreme', desc: 'Garden-fresh vegetables, herbs, and premium olive oil', price: 449, badge: '15% off', tags: ['Vegetarian', 'Fresh'], img: 'images/pizza-veggie.jpg' },
-        { id: 6, name: 'Meat Lovers', desc: 'Pepperoni, Italian sausage, crispy bacon, smoked ham', price: 649, badge: '20% off', tags: ['Popular', 'Loaded'], img: 'images/pizza-meat-lovers.jpg' }
+        { id: 1, name: 'Pepperoni Classic', desc: 'Classic pepperoni with mozzarella and signature tomato sauce', price: 499, badge: '20% off', tags: ['Best Seller', '9 left'], img: 'images/pizza-pepperoni.jpg', category: 'classic', dietary: ['🌶️ Spicy'] },
+        { id: 2, name: 'Margherita', desc: 'Fresh basil, creamy mozzarella, San Marzano tomato sauce', price: 399, badge: '15% off', tags: ['Classic', 'Wood-Fired'], img: 'images/pizza-margherita.jpg', category: 'classic', dietary: ['🌱 Veg'] },
+        { id: 3, name: 'BBQ Chicken', desc: 'Grilled chicken, smoky BBQ sauce, caramelized onions', price: 549, badge: '10% off', tags: ['Chef Choice', '5 left'], img: 'images/pizza-bbq-chicken.jpg', category: 'gourmet', dietary: ['🌶️ Spicy'] },
+        { id: 4, name: 'Quattro Formaggi', desc: 'Four Italian cheese blend — mozzarella, gorgonzola, parmesan', price: 599, badge: '25% off', tags: ['Premium', 'Four Cheese'], img: 'images/pizza-four-cheese.jpg', category: 'gourmet', dietary: ['🌱 Veg', '🌾 Gluten-Free Option'] },
+        { id: 5, name: 'Veggie Supreme', desc: 'Garden-fresh vegetables, herbs, and premium olive oil', price: 449, badge: '15% off', tags: ['Vegetarian', 'Fresh'], img: 'images/pizza-veggie.jpg', category: 'veg', dietary: ['🌱 Veg'] },
+        { id: 6, name: 'Meat Lovers', desc: 'Pepperoni, Italian sausage, crispy bacon, smoked ham', price: 649, badge: '20% off', tags: ['Popular', 'Loaded'], img: 'images/pizza-meat-lovers.jpg', category: 'meat', dietary: ['🌶️ Spicy'] }
     ];
 
     const testimonials = [
-        { name: 'Priya Sharma', text: 'Best pizza in town! The wood-fired crust is absolutely perfect. Every bite takes you to Naples.', rating: 5 },
-        { name: 'Rahul Verma', text: 'Amazing flavors and super fast delivery. The family combo is great value for money!', rating: 5 },
-        { name: 'Anita Desai', text: 'Love the fresh ingredients. You can really taste the difference compared to other places.', rating: 4 },
-        { name: 'Vikram Patel', text: 'The Quattro Formaggi is to die for. Premium quality at very reasonable prices.', rating: 5 },
-        { name: 'Meera Krishnan', text: 'Cozy ambiance and incredible food. Perfect for date nights. Highly recommended!', rating: 5 }
+        { name: 'Priya Sharma', text: 'Best pizza in town! The wood-fired crust is absolutely perfect. Every bite takes you to Naples.', rating: 5, source: 'Google', verified: true },
+        { name: 'Rahul Verma', text: 'Amazing flavors and super fast delivery. The family combo is great value for money!', rating: 5, source: 'Zomato', verified: true },
+        { name: 'Anita Desai', text: 'Love the fresh ingredients. You can really taste the difference compared to other places.', rating: 4, source: 'Google', verified: true },
+        { name: 'Vikram Patel', text: 'The Quattro Formaggi is to die for. Premium quality at very reasonable prices.', rating: 5, source: 'Yelp', verified: false },
+        { name: 'Meera Krishnan', text: 'Cozy ambiance and incredible food. Perfect for date nights. Highly recommended!', rating: 5, source: 'Google', verified: true }
     ];
 
     // =====================================================================
@@ -93,6 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
+    // Dynamic aria-hidden: false on desktop, managed on mobile
+    const desktopMQ = window.matchMedia('(min-width: 769px)');
+    function updateNavA11y(mq) {
+        if (mq.matches && navMenu) {
+            navMenu.setAttribute('aria-hidden', 'false');
+        } else if (navMenu && !navMenu.classList.contains('active')) {
+            navMenu.setAttribute('aria-hidden', 'true');
+        }
+    }
+    desktopMQ.addEventListener('change', updateNavA11y);
+    updateNavA11y(desktopMQ);
+
     // Hamburger toggle for full-screen overlay
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', () => {
@@ -107,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openNavMenu() {
         hamburger?.classList.add('active');
+        hamburger?.setAttribute('aria-expanded', 'true');
         navMenu?.classList.add('active');
         navMenu?.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -114,8 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeNavMenu() {
         hamburger?.classList.remove('active');
+        hamburger?.setAttribute('aria-expanded', 'false');
         navMenu?.classList.remove('active');
-        navMenu?.setAttribute('aria-hidden', 'true');
+        if (!desktopMQ.matches) {
+            navMenu?.setAttribute('aria-hidden', 'true');
+        }
         document.body.style.overflow = '';
     }
 
@@ -359,12 +375,26 @@ document.addEventListener('DOMContentLoaded', () => {
     renderOffers();
 
     // =====================================================================
-    // 7. FOOD CARDS
+    // 7. FOOD CARDS + FILTER + CART
     // =====================================================================
     const menuGrid = document.getElementById('menuGrid');
-    if (menuGrid) {
-        menuGrid.innerHTML = pizzaData.map(pizza => `
-            <div class="food-card reveal">
+    const cartBar = document.getElementById('cartBar');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartTotalEl = document.getElementById('cartTotal');
+    let cart = [];
+
+    function getDietaryClass(badge) {
+        if (badge.includes('Veg')) return 'food-card__dietary-badge--veg';
+        if (badge.includes('Spicy')) return 'food-card__dietary-badge--spicy';
+        if (badge.includes('Gluten')) return 'food-card__dietary-badge--gf';
+        return '';
+    }
+
+    function renderMenu(filter = 'all') {
+        if (!menuGrid) return;
+        const filtered = filter === 'all' ? pizzaData : pizzaData.filter(p => p.category === filter);
+        menuGrid.innerHTML = filtered.map(pizza => `
+            <div class="food-card reveal" data-category="${pizza.category}">
                 <div class="food-card__img-wrap">
                     <img src="${pizza.img}" alt="${pizza.name}" class="food-card__img" loading="lazy">
                     <span class="food-card__badge-tag">${pizza.badge}</span>
@@ -380,6 +410,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="food-card__price-tag">₹${pizza.price}</span>
                     </div>
                     <p class="food-card__desc">${pizza.desc}</p>
+                    <div class="food-card__dietary">
+                        ${(pizza.dietary || []).map(d => `<span class="food-card__dietary-badge ${getDietaryClass(d)}">${d}</span>`).join('')}
+                    </div>
                     <div class="food-card__tags">
                         ${pizza.tags.map(t => `<span class="food-card__tag">${t}</span>`).join('')}
                     </div>
@@ -389,20 +422,99 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
 
         menuGrid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }
 
+    function updateCartBar() {
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        if (cartCountEl) cartCountEl.textContent = count;
+        if (cartTotalEl) cartTotalEl.textContent = total;
+        if (cartBar) {
+            cartBar.classList.toggle('visible', count > 0);
+            cartBar.setAttribute('aria-hidden', count > 0 ? 'false' : 'true');
+        }
+    }
+
+    if (menuGrid) {
+        renderMenu();
+
+        // Filter pills
+        const filterBtns = document.querySelectorAll('.menu__filter-pill');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderMenu(btn.dataset.filter);
+            });
+        });
+
+        // Add to cart with persistent state
         menuGrid.addEventListener('click', (e) => {
             const btn = e.target.closest('.add-to-cart-btn');
-            if (btn) {
-                showToast('🍕 Added to cart! (Demo)', 'success');
+            if (!btn) return;
+            const id = parseInt(btn.dataset.id);
+            const pizza = pizzaData.find(p => p.id === id);
+            if (!pizza) return;
+
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id, name: pizza.name, price: pizza.price, qty: 1 });
             }
+            updateCartBar();
+            showToast(`🍕 ${pizza.name} added to cart!`, 'success');
+        });
+    }
+
+    // Cart checkout button
+    const cartCheckout = document.getElementById('cartCheckout');
+    if (cartCheckout) {
+        cartCheckout.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            showToast(`🛒 Checkout: ₹${total} — Order placed! (Demo)`, 'success');
+            cart = [];
+            updateCartBar();
         });
     }
 
     // =====================================================================
-    // 8. ACCORDION GALLERY
+    // 8. ACCORDION GALLERY + LIGHTBOX
     // =====================================================================
     const galleryStrips = document.querySelectorAll('.gallery__strip');
-    galleryStrips.forEach(strip => {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    let currentLightboxIndex = 0;
+
+    const galleryImages = Array.from(galleryStrips).map(strip => ({
+        src: strip.querySelector('.gallery__strip-img')?.src || '',
+        alt: strip.querySelector('.gallery__strip-title')?.textContent || ''
+    }));
+
+    function openLightbox(index) {
+        if (!lightbox || !galleryImages[index]) return;
+        currentLightboxIndex = index;
+        lightboxImg.src = galleryImages[index].src;
+        lightboxImg.alt = galleryImages[index].alt;
+        lightboxCaption.textContent = galleryImages[index].alt;
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    galleryStrips.forEach((strip, index) => {
         strip.addEventListener('mouseenter', () => {
             galleryStrips.forEach(s => s.classList.remove('active'));
             strip.classList.add('active');
@@ -410,25 +522,99 @@ document.addEventListener('DOMContentLoaded', () => {
         strip.addEventListener('click', () => {
             galleryStrips.forEach(s => s.classList.remove('active'));
             strip.classList.add('active');
+            openLightbox(index);
         });
     });
 
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    document.getElementById('lightbox')?.querySelector('.lightbox__overlay')?.addEventListener('click', closeLightbox);
+
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', () => {
+            currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+            openLightbox(currentLightboxIndex);
+        });
+    }
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', () => {
+            currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
+            openLightbox(currentLightboxIndex);
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox?.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') lightboxPrev?.click();
+        if (e.key === 'ArrowRight') lightboxNext?.click();
+    });
+
     // =====================================================================
-    // 9. RESERVATION FORM
+    // 9. RESERVATION FORM (Enhanced)
     // =====================================================================
     const reservationForm = document.getElementById('reservationForm');
+    const resDate = document.getElementById('resDate');
+    const resTime = document.getElementById('resTime');
+    const resGuests = document.getElementById('resGuests');
+    const resGuestCount = document.getElementById('resGuestCount');
+    const guestMinus = document.getElementById('guestMinus');
+    const guestPlus = document.getElementById('guestPlus');
+
+    // Set min date to today
+    if (resDate) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        resDate.min = `${yyyy}-${mm}-${dd}`;
+        resDate.value = `${yyyy}-${mm}-${dd}`;
+    }
+
+    // Time slot buttons
+    const timeSlots = document.querySelectorAll('.reservation__time-btn');
+    timeSlots.forEach(btn => {
+        btn.addEventListener('click', () => {
+            timeSlots.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (resTime) resTime.value = btn.dataset.time;
+        });
+    });
+
+    // Guest counter
+    let guestCount = 2;
+    function updateGuestDisplay() {
+        if (resGuestCount) resGuestCount.textContent = guestCount;
+        if (resGuests) resGuests.value = guestCount;
+        if (guestMinus) guestMinus.disabled = guestCount <= 1;
+    }
+
+    if (guestMinus) {
+        guestMinus.addEventListener('click', () => {
+            if (guestCount > 1) { guestCount--; updateGuestDisplay(); }
+        });
+    }
+    if (guestPlus) {
+        guestPlus.addEventListener('click', () => {
+            if (guestCount < 12) { guestCount++; updateGuestDisplay(); }
+        });
+    }
+
     if (reservationForm) {
         reservationForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const date = document.getElementById('resDate')?.value;
-            const time = document.getElementById('resTime')?.value;
-            const guests = document.getElementById('resGuests')?.value;
-            showToast(`Table reserved for ${guests} guests on ${date} at ${time}! 🍷`, 'success');
+            const date = resDate?.value;
+            const time = resTime?.value;
+            const guests = resGuests?.value;
+            if (!date || !time) {
+                showToast('Please select a date and time slot.', 'error');
+                return;
+            }
+            showToast(`✅ Table reserved for ${guests} guests on ${date} at ${time}! 🍷`, 'success');
         });
     }
 
     // =====================================================================
-    // 10. REVIEWS (Vertical Grid)
+    // 10. REVIEWS (Vertical Grid + Trust Signals)
     // =====================================================================
     const reviewsGrid = document.getElementById('reviewsGrid') || document.getElementById('reviewsTrack');
 
@@ -442,8 +628,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div>
                         <h4 class="review-card__name">${t.name}</h4>
                         <div class="review-card__stars">${generateStars(t.rating)}</div>
+                        ${t.verified ? '<span class="review-card__verified"><i class="fa-solid fa-circle-check"></i> Verified</span>' : ''}
                     </div>
                 </div>
+                <span class="review-card__source"><i class="fa-solid fa-arrow-up-right-from-square"></i> via ${t.source}</span>
             </div>
         `).join('');
 
