@@ -2205,54 +2205,241 @@ h1, h2, h3, h4 {
 }
 
 /* ------------------------------------------------------------
-   17. RESPONSIVE MEDIA QUERIES
+   17. COMPREHENSIVE RESPONSIVE MEDIA QUERIES
    ------------------------------------------------------------ */
+
+/* Prevent horizontal overflow */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Large Laptop / Tablet Landscape (<= 1024px) */
 @media (max-width: 1024px) {
-    .veg-promise__grid, .menu-grid, .why-us__grid, .masonry-gallery, .reviews-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .featured-offer-card {
-        grid-template-columns: 1fr;
-        padding: 36px;
-    }
+    .hero { padding: 60px 0 80px; }
+    .hero__title { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+    .hero__pizza-img { height: 400px; }
+
+    .veg-promise__grid, 
+    .menu-grid, 
+    .why-us__grid, 
+    .masonry-gallery, 
+    .reviews-grid,
     .offers-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
+
+    .featured-offer-card {
+        grid-template-columns: 1fr;
+        padding: 32px;
+        gap: 24px;
+    }
+
+    .featured-offer-card__img-wrap {
+        height: 240px;
+    }
+
     .story__grid {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
+
     .footer__grid {
         grid-template-columns: 1fr 1fr;
+        gap: 32px;
     }
 }
 
+/* Tablet Portrait & Mobile Navigation (<= 768px) */
 @media (max-width: 768px) {
     :root { --nav-height: 70px; }
+
+    .announcement-bar { font-size: 0.78rem; padding: 6px 0; }
+    .announcement-bar__content { flex-direction: column; gap: 4px; text-align: center; }
+
     .navbar__nav {
         position: fixed;
         inset: var(--nav-height) 0 0 0;
         background: var(--bg-warm);
         flex-direction: column;
         justify-content: center;
-        gap: 24px;
+        align-items: center;
+        gap: 20px;
         opacity: 0;
         visibility: hidden;
         transition: var(--transition);
+        z-index: 999;
     }
+
+    [data-theme="dark"] .navbar__nav {
+        background: var(--bg-dark-surface);
+    }
+
     .navbar__nav.active {
         opacity: 1;
         visibility: visible;
     }
+
     .hamburger-btn { display: flex; }
     .hide-mobile { display: none; }
+
+    /* Hide floating ingredients on mobile to prevent overflow */
+    .floating-ingredient { display: none; }
+
+    .hero { padding: 40px 0 60px; }
+    .hero__title { font-size: 2.2rem; }
+    .hero__subtitle { font-size: 1rem; }
     
-    .veg-promise__grid, .menu-grid, .why-us__grid, .masonry-gallery, .reviews-grid, .offers-grid {
-        grid-template-columns: 1fr;
+    .hero__ctas {
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        gap: 12px;
     }
+
+    .hero__ctas .btn {
+        width: 100%;
+    }
+
+    .hero__pizza-img { height: 320px; }
+    
+    .hero__floating-card {
+        right: 0;
+        bottom: 10px;
+        padding: 10px 16px;
+        font-size: 0.8rem;
+    }
+
+    .veg-promise, .offers-section, .story-section, .menu-section, .why-us, .gallery-section, .reviews-section, .cta-banner {
+        padding: 60px 0;
+    }
+
+    .veg-promise__grid, 
+    .menu-grid, 
+    .why-us__grid, 
+    .masonry-gallery, 
+    .reviews-grid, 
+    .offers-grid,
+    .offers-archive__grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* Scrollable menu category tabs on touch devices */
+    .menu-category-tabs, .dietary-filter-bar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        width: 100%;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .menu-category-tabs::-webkit-scrollbar, .dietary-filter-bar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category-tab, .dietary-chip {
+        flex-shrink: 0;
+    }
+
+    .cta-title { font-size: 2.2rem; }
+    .cta-subtitle { font-size: 1rem; }
+
     .footer__grid {
         grid-template-columns: 1fr;
+        gap: 32px;
     }
+
+    .footer__bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    /* Owner Admin Modal Responsive */
+    .admin-modal {
+        width: 95%;
+        max-height: 94vh;
+    }
+
+    .admin-modal__header {
+        padding: 16px 20px;
+    }
+
+    .admin-modal__body {
+        padding: 16px;
+    }
+
     .admin-stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* Cart Drawer Fullscreen Mobile */
+    .cart-drawer {
+        max-width: 100%;
+        right: -100%;
     }
 }
+
+/* Small Mobile Devices (<= 480px) */
+@media (max-width: 480px) {
+    .container { padding: 0 16px; }
+
+    .navbar__logo-title { font-size: 1.3rem; }
+
+    .hero__badge { font-size: 0.78rem; padding: 6px 14px; }
+    .hero__title { font-size: 1.85rem; }
+    .hero__pizza-img { height: 260px; }
+
+    .featured-offer-card { padding: 20px; }
+    .featured-offer-card__title { font-size: 1.5rem; }
+
+    .countdown-box { gap: 8px; }
+    .countdown-unit { min-width: 52px; padding: 8px 10px; }
+    .countdown-num { font-size: 1.1rem; }
+
+    .featured-offer-card__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .featured-offer-card__actions .btn,
+    .featured-offer-card__actions .coupon-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cart-bar__inner {
+        padding: 10px 16px;
+        font-size: 0.8rem;
+        gap: 10px;
+    }
+
+    .cart-bar__checkout {
+        padding: 6px 12px;
+        font-size: 0.78rem;
+    }
+
+    .gallery-item { height: 220px; }
+
+    .toast-container {
+        left: 16px;
+        right: 16px;
+        bottom: 80px;
+    }
+
+    .toast {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.82rem;
+    }
+}
+
