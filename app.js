@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateStars(rating) {
         let stars = '';
         for (let i = 1; i <= 5; i++) {
-            stars += i <= rating ? '★' : '☆';
+            stars += i <= rating ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
         }
         return stars;
     }
@@ -254,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (offers.length === 0) {
             offersTrack.innerHTML = '<div class="offers__empty"><p>No active offers right now. Check back soon!</p></div>';
-            if (offersDots) offersDots.innerHTML = '';
             return;
         }
 
@@ -266,9 +265,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const time = formatCountdown(timeLeft);
 
             return `
-                <div class="offer-card ${i === 0 ? 'active' : ''} ${isExpired ? 'offer-card--expired' : ''}" data-index="${i}">
+                <div class="offer-card ${isExpired ? 'offer-card--expired' : ''}" data-index="${i}">
                     <div class="offer-card__inner">
-                        <div class="offer-card__badge">Today's Deal</div>
+                        <div class="offer-card__badge"><i class="fa-solid fa-fire"></i> Today's Deal</div>
                         <div class="offer-card__discount">-${offer.discount}%</div>
                         <div class="offer-card__image">
                             <img src="${offer.image}" alt="${offer.title}" loading="lazy">
@@ -282,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="offer-card__save">Save ${offer.discount}%</span>
                             </div>
                             <div class="offer-card__timer" data-end="${offer.endDate}">
-                                <span class="offer-card__timer-label">${isExpired ? 'Offer Expired' : 'Offer ends in:'}</span>
+                                <span class="offer-card__timer-label"><i class="fa-regular fa-clock"></i> ${isExpired ? 'Offer Expired' : 'Offer ends in:'}</span>
                                 <div class="offer-card__countdown ${isExpired ? 'expired' : ''}">
                                     <div class="countdown__unit">
                                         <span class="countdown__number" data-hours>${time.h}</span>
@@ -301,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                             </div>
                             <a href="#menu" class="btn btn--primary btn--lg offer-card__cta ${isExpired ? 'disabled' : ''}">
-                                ${isExpired ? 'Expired' : 'Claim Offer →'}
+                                ${isExpired ? 'Expired' : 'Claim Offer <i class="fa-solid fa-arrow-right"></i>'}
                             </a>
                         </div>
                     </div>
@@ -309,72 +308,25 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }).join('');
 
-        if (offersDots) {
-            offersDots.innerHTML = offers.map((_, i) =>
-                `<button class="offers__dot ${i === 0 ? 'active' : ''}" data-index="${i}" aria-label="Go to offer ${i + 1}"></button>`
-            ).join('');
-
-            offersDots.addEventListener('click', (e) => {
-                const dot = e.target.closest('.offers__dot');
-                if (dot) {
-                    currentOffer = parseInt(dot.dataset.index);
-                    updateCarousel();
-                    resetAutoSlide();
-                }
-            });
-        }
-
-        updateCarousel();
-        startAutoSlide();
         startCountdowns();
-    }
 
-    function updateCarousel() {
-        if (!offersTrack) return;
-        const cards = offersTrack.querySelectorAll('.offer-card');
-        const dots = offersDots?.querySelectorAll('.offers__dot');
+        // Drag to scroll for desktop & swipe for touch
+        let isDown = false;
+        let startX, scrollLeft;
 
-        cards.forEach((card, i) => {
-            card.classList.toggle('active', i === currentOffer);
-            card.style.transform = `translateX(${(i - currentOffer) * 100}%)`;
-            card.style.opacity = i === currentOffer ? '1' : '0';
-            card.style.pointerEvents = i === currentOffer ? 'auto' : 'none';
+        offersTrack.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - offersTrack.offsetLeft;
+            scrollLeft = offersTrack.scrollLeft;
         });
-
-        dots?.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentOffer);
-        });
-    }
-
-    function startAutoSlide() {
-        if (offersInterval) clearInterval(offersInterval);
-        const cards = offersTrack?.querySelectorAll('.offer-card');
-        if (!cards || cards.length <= 1) return;
-
-        offersInterval = setInterval(() => {
-            currentOffer = (currentOffer + 1) % cards.length;
-            updateCarousel();
-        }, 5000);
-    }
-
-    function resetAutoSlide() {
-        startAutoSlide();
-    }
-
-    if (offersPrev) {
-        offersPrev.addEventListener('click', () => {
-            const total = offersTrack.querySelectorAll('.offer-card').length;
-            currentOffer = (currentOffer - 1 + total) % total;
-            updateCarousel();
-            resetAutoSlide();
-        });
-    }
-    if (offersNext) {
-        offersNext.addEventListener('click', () => {
-            const total = offersTrack.querySelectorAll('.offer-card').length;
-            currentOffer = (currentOffer + 1) % total;
-            updateCarousel();
-            resetAutoSlide();
+        offersTrack.addEventListener('mouseleave', () => { isDown = false; });
+        offersTrack.addEventListener('mouseup', () => { isDown = false; });
+        offersTrack.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - offersTrack.offsetLeft;
+            const walk = (x - startX) * 1.8;
+            offersTrack.scrollLeft = scrollLeft - walk;
         });
     }
 
@@ -431,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="food-card__tags">
                         ${pizza.tags.map(t => `<span class="food-card__tag">${t}</span>`).join('')}
                     </div>
-                    <button class="food-card__btn add-to-cart-btn" data-id="${pizza.id}">Add to cart</button>
+                    <button class="food-card__btn add-to-cart-btn" data-id="${pizza.id}"><i class="fa-solid fa-cart-shopping"></i> Add to cart</button>
                 </div>
             </div>
         `).join('');
@@ -476,18 +428,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================================================
-    // 10. TESTIMONIAL SLIDER
+    // 10. REVIEWS (Vertical Grid)
     // =====================================================================
-    const reviewsTrack = document.getElementById('reviewsTrack');
-    const reviewsDots = document.getElementById('reviewsDots');
-    const reviewsPrev = document.getElementById('reviewsPrev');
-    const reviewsNext = document.getElementById('reviewsNext');
-    let currentReview = 0;
-    let reviewsInterval = null;
+    const reviewsGrid = document.getElementById('reviewsGrid') || document.getElementById('reviewsTrack');
 
-    if (reviewsTrack) {
-        reviewsTrack.innerHTML = testimonials.map((t, i) => `
-            <div class="review-card ${i === 0 ? 'active' : ''}" data-index="${i}">
+    if (reviewsGrid) {
+        reviewsGrid.innerHTML = testimonials.map(t => `
+            <div class="review-card reveal">
+                <div class="review-card__quote"><i class="fa-solid fa-quote-left"></i></div>
                 <p class="review-card__text">"${t.text}"</p>
                 <div class="review-card__author">
                     <div class="review-card__avatar">${t.name.charAt(0)}</div>
@@ -499,61 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
-        if (reviewsDots) {
-            reviewsDots.innerHTML = testimonials.map((_, i) =>
-                `<button class="reviews__dot ${i === 0 ? 'active' : ''}" data-index="${i}" aria-label="Go to review ${i + 1}"></button>`
-            ).join('');
-
-            reviewsDots.addEventListener('click', (e) => {
-                const dot = e.target.closest('.reviews__dot');
-                if (dot) {
-                    currentReview = parseInt(dot.dataset.index);
-                    updateReviews();
-                    resetReviewsSlide();
-                }
-            });
-        }
-
-        function updateReviews() {
-            const cards = reviewsTrack.querySelectorAll('.review-card');
-            const dots = reviewsDots?.querySelectorAll('.reviews__dot');
-
-            cards.forEach((card, i) => {
-                card.classList.toggle('active', i === currentReview);
-            });
-            dots?.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentReview);
-            });
-        }
-
-        function startReviewsSlide() {
-            if (reviewsInterval) clearInterval(reviewsInterval);
-            reviewsInterval = setInterval(() => {
-                currentReview = (currentReview + 1) % testimonials.length;
-                updateReviews();
-            }, 6000);
-        }
-
-        function resetReviewsSlide() {
-            startReviewsSlide();
-        }
-
-        if (reviewsPrev) {
-            reviewsPrev.addEventListener('click', () => {
-                currentReview = (currentReview - 1 + testimonials.length) % testimonials.length;
-                updateReviews();
-                resetReviewsSlide();
-            });
-        }
-        if (reviewsNext) {
-            reviewsNext.addEventListener('click', () => {
-                currentReview = (currentReview + 1) % testimonials.length;
-                updateReviews();
-                resetReviewsSlide();
-            });
-        }
-
-        startReviewsSlide();
+        reviewsGrid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     }
 
     // =====================================================================
