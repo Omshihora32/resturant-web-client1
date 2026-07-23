@@ -78,6 +78,16 @@
     padding: 0;
 }
 
+/* Explicit FontAwesome Icon Protections */
+.fa-solid, .fa-regular, .fa-brands, .fas, .far, .fab, i[class^="fa-"], i[class*=" fa-"] {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
