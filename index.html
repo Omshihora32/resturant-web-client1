@@ -1,122 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forno Rosso - Premium Italian Pizza Restaurant. Handcrafted wood-fired pizzas made with the freshest ingredients. Order online for delivery or dine-in.">
-    <meta name="keywords" content="pizza, Italian restaurant, wood-fired pizza, delivery, premium pizza, handmade pizza">
-    <meta name="author" content="Forno Rosso">
-    <title>Forno Rosso — Premium Italian Pizza</title>
+    <meta name="description" content="Forno Rosso — 100% Pure Vegetarian Artisan Wood-Fired Pizza. Made with fresh organic ingredients, daily sourdough, and handcrafted San Marzano sauce.">
+    <meta name="keywords" content="pure veg pizza, vegetarian pizza, wood fired pizza, stone oven, Jain pizza, no onion no garlic, artisan pizza">
+    <title>Forno Rosso — 100% Pure Veg Artisan Pizza</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn1TE82KOxbRE3e40+99Inw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QX4TctnWMn1TE82KOxbRE3e40+99Inw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- ========== NAVIGATION (Sweetgreen-inspired) ========== -->
-    <header class="navbar" id="navbar">
-        <div class="navbar__container">
-            <!-- Left: 2-line Pill Hamburger -->
-            <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-            </button>
 
-            <!-- Center: Clean Brand Logo -->
+    <!-- ========== TOP ANNOUNCEMENT BAR ========== -->
+    <div class="announcement-bar">
+        <div class="container announcement-bar__content">
+            <span>🌱 100% Pure Vegetarian Kitchen | Free 30-Min Delivery on orders above ₹499!</span>
+            <div class="announcement-bar__right">
+                <a href="#offers" class="announcement-link"><i class="fa-solid fa-fire"></i> Today's Deals</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== STICKY NAVIGATION ========== -->
+    <header class="navbar" id="navbar">
+        <div class="container navbar__container">
+            <!-- Brand Logo -->
             <a href="#hero" class="navbar__logo">
-                <span class="navbar__logo-text">forno rosso.</span>
+                <span class="navbar__logo-badge">🌱 PURE VEG</span>
+                <span class="navbar__logo-title">forno rosso.</span>
             </a>
 
-            <!-- Right Actions: Heart + Place order -->
+            <!-- Nav Links -->
+            <nav class="navbar__nav" id="navMenu" aria-hidden="false">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#veg-promise" class="nav-link">Pure Veg</a>
+                <a href="#offers" class="nav-link">Offers 🔥</a>
+                <a href="#story" class="nav-link">Our Story</a>
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#why-us" class="nav-link">Why Us</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#reviews" class="nav-link">Reviews</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <!-- Actions -->
             <div class="navbar__actions">
-                <button class="navbar__fav" aria-label="Favorites"><i class="fa-regular fa-heart"></i></button>
-                <a href="#menu" class="navbar__order-btn"><i class="fa-solid fa-utensils"></i> Place the order</a>
+                <button class="icon-btn" id="openAdminBtn" title="Admin Portal" aria-label="Admin Portal">
+                    <i class="fa-solid fa-user-shield"></i>
+                </button>
+                <button class="icon-btn cart-btn-nav" id="openCartBtn" aria-label="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cartCountBadge">0</span>
+                </button>
+                <a href="#menu" class="btn btn--primary btn--sm hide-mobile">Order Now</a>
+
+                <!-- Hamburger Mobile Toggle -->
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Scrollable Full-screen Navigation Overlay -->
-    <div class="navbar__menu" id="navMenu" aria-hidden="true">
-        <nav class="navbar__menu-inner">
-            <a href="#hero" class="navbar__menu-link">Home</a>
-            <a href="#offers" class="navbar__menu-link">Offers</a>
-            <a href="#about" class="navbar__menu-link">About</a>
-            <a href="#menu" class="navbar__menu-link">Menu</a>
-            <a href="#reservation" class="navbar__menu-link">Reservation</a>
-            <a href="#gallery" class="navbar__menu-link">Gallery</a>
-            <a href="#contact" class="navbar__menu-link">Contact</a>
-        </nav>
-    </div>
-
     <!-- ========== HERO SECTION ========== -->
     <section class="hero" id="hero">
-        <!-- Background Moving Ticker Marquee (30 deg angle, large font) -->
-        <div class="hero__ticker">
-            <div class="hero__ticker-track">
-                <span class="hero__ticker-item">WOOD FIRED</span>
-                <span class="hero__ticker-item hero__ticker-item--outline">ARTISAN PIZZA</span>
-                <span class="hero__ticker-item">AUTHENTIC ITALIAN</span>
-                <span class="hero__ticker-item hero__ticker-item--outline">FRESH DAILY</span>
-                <span class="hero__ticker-item">WOOD FIRED</span>
-                <span class="hero__ticker-item hero__ticker-item--outline">ARTISAN PIZZA</span>
-            </div>
+        <!-- Floating Ingredient Illustrations with Micro Animations -->
+        <div class="floating-ingredient floating-ingredient--basil" style="top: 15%; left: 8%;">
+            <span class="ingredient-icon">🍃</span> Fresh Basil
+        </div>
+        <div class="floating-ingredient floating-ingredient--tomato" style="top: 25%; right: 10%;">
+            <span class="ingredient-icon">🍅</span> San Marzano
+        </div>
+        <div class="floating-ingredient floating-ingredient--cheese" style="top: 68%; left: 10%;">
+            <span class="ingredient-icon">🧀</span> Pure Mozzarella
+        </div>
+        <div class="floating-ingredient floating-ingredient--olive" style="top: 75%; right: 12%;">
+            <span class="ingredient-icon">🫒</span> Kalamata Olive
+        </div>
+        <div class="floating-ingredient floating-ingredient--mushroom" style="top: 45%; left: 4%;">
+            <span class="ingredient-icon">🍄</span> Wild Mushroom
         </div>
 
-        <!-- Center Stadium/Capsule Image Container -->
-        <div class="hero__stadium-wrapper">
-            <div class="hero__stadium">
-                <img src="images/hero-pizza.jpg" alt="Artisan Italian Pizza" class="hero__stadium-img">
-                <a href="#menu" class="hero__scroll-badge">
-                    <span>Scroll</span>
-                    <span>To Explore</span>
+        <div class="container hero__container">
+            <div class="hero__badge reveal">
+                <span class="hero__badge-icon">🌱</span>
+                <span>100% Pure Vegetarian Pizzeria</span>
+            </div>
+
+            <h1 class="hero__title reveal">
+                Every Slice Made With <span class="text-highlight">Love.</span>
+            </h1>
+
+            <p class="hero__subtitle reveal">
+                Handcrafted artisan wood-fired pizzas, baked at 900°F in our authentic stone oven using 100% pure vegetarian ingredients.
+            </p>
+
+            <!-- Key Feature Badges -->
+            <div class="hero__tags reveal">
+                <span class="hero__tag"><i class="fa-solid fa-seedling"></i> 100% Pure Vegetarian</span>
+                <span class="hero__tag"><i class="fa-solid fa-fire-burner"></i> Stone Oven Baked</span>
+                <span class="hero__tag"><i class="fa-solid fa-clock"></i> 48-Hr Fermented Dough</span>
+                <span class="hero__tag"><i class="fa-solid fa-leaf"></i> No Onion Garlic Options</span>
+            </div>
+
+            <!-- Hero Action Buttons -->
+            <div class="hero__ctas reveal">
+                <a href="#menu" class="btn btn--primary btn--hero glow-effect">
+                    <i class="fa-solid fa-pizza-slice"></i> Order Online Now
+                </a>
+                <a href="#offers" class="btn btn--secondary btn--hero">
+                    <i class="fa-solid fa-fire"></i> View Special Deals
                 </a>
             </div>
-            <div class="hero__cta-group">
-                <a href="#menu" class="hero__cta hero__cta--primary"><i class="fa-solid fa-bag-shopping"></i> Order Online</a>
-                <a href="#reservation" class="hero__cta hero__cta--secondary"><i class="fa-regular fa-calendar"></i> Book a Table</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- ========== SPECIAL OFFERS SECTION ========== -->
-    <section class="offers" id="offers">
-        <div class="container">
-            <div class="section-header section-header--light reveal">
-                <span class="section-tag">Limited Time</span>
-                <h2 class="section-title">Exclusive Special Offers</h2>
-                <p class="section-subtitle">Grab these incredible deals before the timer runs out!</p>
-            </div>
-
-            <div class="offers__carousel reveal">
-                <div class="offers__track" id="offersTrack">
-                    <!-- Offer cards rendered dynamically by JS (swipeable / draggable) -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== ABOUT & STORY TIMELINE SECTION (Feature #6) ========== -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about__grid">
-                <div class="about__image-wrapper reveal">
-                    <img src="images/about-restaurant.jpg" alt="Inside Forno Rosso restaurant" loading="lazy">
-                    <div class="about__image-badge">
-                        <span class="about__image-badge-number">15+</span>
-                        <span class="about__image-badge-text">Years of Culinary Excellence</span>
+            <!-- Hero Stage Food Visual -->
+            <div class="hero__visual reveal">
+                <div class="hero__pizza-stage">
+                    <div class="pizza-glow"></div>
+                    <img src="images/hero-pizza.jpg" alt="Artisan Wood Fired Pure Veg Pizza" class="hero__pizza-img">
+                    <div class="steam-container">
+                        <span class="steam-particle"></span>
+                        <span class="steam-particle"></span>
+                        <span class="steam-particle"></span>
+                    </div>
+                    <div class="hero__floating-card">
+                        <div class="hero__card-stars">★★★★★</div>
+                        <p class="hero__card-title">Top Rated Artisan Pizza</p>
+                        <p class="hero__card-sub">50,000+ Happy Veg Guests</p>
                     </div>
                 </div>
-                <div class="about__content reveal">
-                    <span class="section-tag">Our Journey</span>
-                    <h2 class="section-title">Traditional Recipes, Modern Passion</h2>
-                    <p class="about__text">
-                        Forno Rosso brings the authentic taste of Naples to your table. Explore our timeline of culinary craftsmanship below.
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PURE VEG PROMISE SECTION ========== -->
+    <section class="veg-promise" id="veg-promise">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag section-tag--green">Guaranteed Purity</span>
+                <h2 class="section-title">Our 100% Pure Veg Promise</h2>
+                <p class="section-subtitle">We believe food tastes best when prepared with passion, respect, and zero compromise on purity.</p>
+            </div>
+
+            <div class="veg-promise__grid">
+                <div class="promise-card reveal">
+                    <div class="promise-card__icon promise-card__icon--green">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3>100% Vegetarian Kitchen</h3>
+                    <p>Our kitchen is strictly meat-free and egg-free. Zero cross-contamination, guaranteed pure.</p>
+                </div>
+
+                <div class="promise-card reveal">
+                    <div class="promise-card__icon promise-card__icon--gold">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>No Onion & Garlic Options</h3>
+                    <p>Special Jain-friendly menu items prepared separately with dedicated tools and oven space.</p>
+                </div>
+
+                <div class="promise-card reveal">
+                    <div class="promise-card__icon promise-card__icon--red">
+                        <i class="fa-solid fa-carrot"></i>
+                    </div>
+                    <h3>Farm Fresh Organic Produce</h3>
+                    <p>Sourced daily from certified local organic farms. Tomatoes, herbs, bell peppers & mushrooms.</p>
+                </div>
+
+                <div class="promise-card reveal">
+                    <div class="promise-card__icon promise-card__icon--green">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                    </div>
+                    <h3>48-Hour Sourdough Dough</h3>
+                    <p>Slowly fermented natural sourdough dough for superior digestability and signature airy crust.</p>
+                </div>
+
+                <div class="promise-card reveal">
+                    <div class="promise-card__icon promise-card__icon--gold">
+                        <i class="fa-solid fa-cheese"></i>
+                    </div>
+                    <h3>100% Real Dairy Mozzarella</h3>
+                    <p>Crafted exclusively from fresh, pure dairy milk. No artificial fats or synthetic cheese substitutes.</p>
+                </div>
+
+                <div class="promise-card reveal">
+                    <div class="promise-card__icon promise-card__icon--red">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <h3>Wood-Fired Stone Oven</h3>
+                    <p>Baked on natural volcanic stone at 900°F using sustainable oak wood for authentic smoky flavor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ⭐ SPECIAL OFFERS SECTION (MOST IMPORTANT) ========== -->
+    <section class="offers-section" id="offers">
+        <div class="container">
+            <div class="offers-header-wrapper reveal">
+                <div class="section-header section-header--left">
+                    <span class="section-tag section-tag--fire"><i class="fa-solid fa-fire"></i> Interactive Offer Wall</span>
+                    <h2 class="section-title">Exclusive Special Deals & Coupons</h2>
+                    <p class="section-subtitle">Real-time offers updated directly by our master chef! Grab them before time runs out.</p>
+                </div>
+
+                <div class="offers-header-actions">
+                    <button class="btn btn--outline btn--sm" id="manageOffersShortcut"><i class="fa-solid fa-gear"></i> Owner Portal</button>
+                </div>
+            </div>
+
+            <!-- FEATURED HERO OFFER CARD -->
+            <div class="featured-offer-container reveal" id="featuredOfferContainer">
+                <!-- Featured offer rendered dynamically by JS -->
+            </div>
+
+            <!-- REGULAR OFFERS GRID -->
+            <div class="offers-grid reveal" id="offersGrid">
+                <!-- Offer cards rendered dynamically by JS -->
+            </div>
+
+            <!-- EXPIRED OFFERS ARCHIVE -->
+            <div class="offers-archive reveal">
+                <div class="offers-archive__header" id="archiveToggle">
+                    <h4><i class="fa-solid fa-box-archive"></i> Expired Deals Archive</h4>
+                    <span class="archive-count-badge" id="expiredCount">0 Expired</span>
+                    <i class="fa-solid fa-chevron-down archive-arrow"></i>
+                </div>
+                <div class="offers-archive__grid hidden" id="expiredGrid">
+                    <!-- Expired cards rendered dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== STORY & TIMELINE SECTION ========== -->
+    <section class="story-section" id="story">
+        <div class="container">
+            <div class="story__grid">
+                <div class="story__image-col reveal">
+                    <div class="story__image-card">
+                        <img src="images/about-restaurant.jpg" alt="Forno Rosso Kitchen" class="story__img">
+                        <div class="story__floating-badge">
+                            <span class="story__badge-number">15+</span>
+                            <span class="story__badge-text">Years of Pure Veg Culinary Excellence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story__content-col reveal">
+                    <span class="section-tag">Craftsmanship & Tradition</span>
+                    <h2 class="section-title">Born in Naples, Crafted with Purity</h2>
+                    <p class="story__lead">
+                        Forno Rosso was founded on a simple mission: to create world-class, authentic Italian artisan pizza while remaining 100% pure vegetarian.
+                    </p>
+                    <p class="story__body">
+                        Our master pizzaiolos train in traditional Neapolitan dough stretch techniques, pairing century-old fermentation secrets with farm-fresh organic vegetables and handcrafted tomato sauces.
                     </p>
 
-                    <!-- Story Timeline Interactive Tabs (Compact Horizontal Layout) -->
-                    <div class="story-timeline" id="storyTimeline">
+                    <!-- Compact Timeline Tabs -->
+                    <div class="story-timeline-wrapper">
                         <div class="timeline-tabs" id="timelineTabs">
                             <button class="timeline-tab active" data-year="2011">2011</button>
                             <button class="timeline-tab" data-year="2015">2015</button>
@@ -126,24 +283,24 @@
 
                         <div class="timeline-cards" id="timelineCards">
                             <div class="timeline-card active" data-year="2011">
-                                <span class="timeline-card__year">2011</span>
-                                <h4 class="timeline-card__title">The Beginning in Naples</h4>
-                                <p class="timeline-card__desc">Started with a single traditional wood-fired stone oven and a family recipe passed down through generations.</p>
+                                <span class="timeline-card__year">2011 — Naples Foundations</span>
+                                <h4>First Stone Oven Fired</h4>
+                                <p>Started with a single volcanic stone oven and a commitment to 100% vegetarian artisan dough.</p>
                             </div>
                             <div class="timeline-card" data-year="2015">
-                                <span class="timeline-card__year">2015</span>
-                                <h4 class="timeline-card__title">48-Hour Fermentation Mastery</h4>
-                                <p class="timeline-card__desc">Perfected our signature sourdough dough fermentation technique for maximum digestability and crispness.</p>
+                                <span class="timeline-card__year">2015 — Sourdough Perfection</span>
+                                <h4>48-Hour Natural Fermentation</h4>
+                                <p>Mastered our signature sourdough technique providing a light, crisp crust that is easy to digest.</p>
                             </div>
                             <div class="timeline-card" data-year="2019">
-                                <span class="timeline-card__year">2019</span>
-                                <h4 class="timeline-card__title">Flagship Restaurant Opening</h4>
-                                <p class="timeline-card__desc">Opened our flagship dining space bringing genuine Italian imports, volcanic soil tomatoes, and fresh mozzarella.</p>
+                                <span class="timeline-card__year">2019 — Flagship Kitchen</span>
+                                <h4>Pure Veg Dining Hall</h4>
+                                <p>Opened our flagship pure-veg stone pizzeria featuring dedicated Jain preparation counters.</p>
                             </div>
                             <div class="timeline-card" data-year="2026">
-                                <span class="timeline-card__year">2026</span>
-                                <h4 class="timeline-card__title">Awarded #1 Artisan Pizzeria</h4>
-                                <p class="timeline-card__desc">Recognized as the top wood-fired pizzeria, delivering over 50,000 artisan pizzas to happy guests.</p>
+                                <span class="timeline-card__year">2026 — #1 Veg Pizzeria</span>
+                                <h4>Award Winning Artisan Brand</h4>
+                                <p>Recognized as the top pure vegetarian pizzeria, delivering over 50,000 artisan pizzas to food lovers.</p>
                             </div>
                         </div>
                     </div>
@@ -152,337 +309,442 @@
         </div>
     </section>
 
-    <!-- ========== MENU SECTION ========== -->
-    <section class="menu" id="menu">
+    <!-- ========== MENU SECTION WITH SEARCH & CATEGORY TABS ========== -->
+    <section class="menu-section" id="menu">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-tag">Handcrafted Menu</span>
-                <h2 class="section-title">Popular Pizzas</h2>
-                <p class="section-subtitle">Every pizza is handcrafted to order and baked in our wood-fired oven.</p>
+                <span class="section-tag">Handcrafted Offerings</span>
+                <h2 class="section-title">Our Pure Veg Menu</h2>
+                <p class="section-subtitle">Hand-stretched to order and baked on volcanic stone. 100% Vegetarian guaranteed.</p>
             </div>
-            <div class="menu__filters-wrapper">
-                <div class="menu__search">
-                    <i class="fa-solid fa-magnifying-glass menu__search-icon"></i>
-                    <input type="text" id="menuSearchInput" placeholder="Search pizzas by name or ingredient..." class="menu__search-input" aria-label="Search menu items">
-                </div>
-                <div class="menu__filters" id="menuFilters">
-                    <button class="menu__filter-pill active" data-filter="all">All</button>
-                    <button class="menu__filter-pill" data-filter="classic">Classic Pizzas</button>
-                    <button class="menu__filter-pill" data-filter="gourmet">Gourmet</button>
-                    <button class="menu__filter-pill" data-filter="veg">🌱 Vegetarian</button>
-                    <button class="menu__filter-pill" data-filter="meat">🥩 Meat Lovers</button>
-                </div>
-            </div>
-            <div class="menu__grid" id="menuGrid">
-                <!-- Food cards rendered dynamically by JS -->
-            </div>
-        </div>
-    </section>
 
-    <!-- ========== RESERVATION SECTION ========== -->
-    <section class="reservation" id="reservation">
-        <div class="container">
-            <div class="reservation__card reveal">
-                <h2 class="reservation__title">Reserve Your Table</h2>
-                <p class="reservation__subtitle">Select your preferred date, time & party size</p>
-                <form class="reservation__form" id="reservationForm">
-                    <div class="reservation__field">
-                        <span class="reservation__label"><i class="fa-regular fa-calendar"></i> Date</span>
-                        <input type="date" id="resDate" class="reservation__input" required>
-                    </div>
-                    <div class="reservation__field reservation__field--time">
-                        <span class="reservation__label"><i class="fa-regular fa-clock"></i> Time</span>
-                        <div class="reservation__time-slots" id="resTimeSlots">
-                            <button type="button" class="reservation__time-btn" data-time="12:00">12:00 PM</button>
-                            <button type="button" class="reservation__time-btn" data-time="13:00">1:00 PM</button>
-                            <button type="button" class="reservation__time-btn" data-time="18:00">6:00 PM</button>
-                            <button type="button" class="reservation__time-btn" data-time="19:00">7:00 PM</button>
-                            <button type="button" class="reservation__time-btn active" data-time="20:00">8:00 PM</button>
-                            <button type="button" class="reservation__time-btn" data-time="21:00">9:00 PM</button>
-                        </div>
-                        <input type="hidden" id="resTime" value="20:00" required>
-                    </div>
-                    <div class="reservation__field reservation__field--guests">
-                        <span class="reservation__label"><i class="fa-solid fa-user-group"></i> Guests</span>
-                        <div class="reservation__guest-counter">
-                            <button type="button" class="reservation__guest-btn" id="guestMinus" aria-label="Decrease guests">−</button>
-                            <span class="reservation__guest-count" id="resGuestCount">2</span>
-                            <button type="button" class="reservation__guest-btn" id="guestPlus" aria-label="Increase guests">+</button>
-                        </div>
-                        <input type="hidden" id="resGuests" value="2" required>
-                    </div>
-                    <button type="submit" class="reservation__btn"><i class="fa-solid fa-check"></i> Confirm Reservation</button>
-                </form>
-            </div>
-        </div>
-    </section>
+            <!-- Search & Filter Control Bar -->
+            <div class="menu-controls reveal">
+                <div class="menu-search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="menuSearchInput" placeholder="Search pizzas, pastas, ingredients (e.g., Paneer, Mushroom, Jain)..." class="menu-search-input">
+                </div>
 
-    <!-- ========== ACCORDION GALLERY SECTION ========== -->
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Visual Experience</span>
-                <h2 class="section-title">Gallery</h2>
-                <p class="section-subtitle">Hover or click to explore our kitchen and atmosphere.</p>
+                <!-- Category Tabs -->
+                <div class="menu-category-tabs" id="menuCategories">
+                    <button class="category-tab active" data-category="all">🍕 All Items</button>
+                    <button class="category-tab" data-category="pizza">Pizza</button>
+                    <button class="category-tab" data-category="garlic-bread">Garlic Bread</button>
+                    <button class="category-tab" data-category="pasta">Pasta</button>
+                    <button class="category-tab" data-category="sandwich">Sandwich</button>
+                    <button class="category-tab" data-category="beverages">Beverages</button>
+                    <button class="category-tab" data-category="desserts">Desserts</button>
+                </div>
             </div>
-            <div class="gallery__accordion reveal" id="galleryAccordion">
-                <div class="gallery__strip active">
-                    <img src="images/gallery-1.jpg" alt="Handcrafted Dough" class="gallery__strip-img" loading="lazy">
-                    <div class="gallery__strip-overlay">
-                        <h3 class="gallery__strip-title">Handcrafted Dough</h3>
-                    </div>
-                </div>
-                <div class="gallery__strip">
-                    <img src="images/gallery-2.jpg" alt="Wood-Fired Oven" class="gallery__strip-img" loading="lazy">
-                    <div class="gallery__strip-overlay">
-                        <h3 class="gallery__strip-title">Wood-Fired Oven</h3>
-                    </div>
-                </div>
-                <div class="gallery__strip">
-                    <img src="images/gallery-3.jpg" alt="Fresh Ingredients" class="gallery__strip-img" loading="lazy">
-                    <div class="gallery__strip-overlay">
-                        <h3 class="gallery__strip-title">Fresh Ingredients</h3>
-                    </div>
-                </div>
-                <div class="gallery__strip">
-                    <img src="images/gallery-4.jpg" alt="Mozzarella Pull" class="gallery__strip-img" loading="lazy">
-                    <div class="gallery__strip-overlay">
-                        <h3 class="gallery__strip-title">Mozzarella Pull</h3>
-                    </div>
-                </div>
-                <div class="gallery__strip">
-                    <img src="images/gallery-5.jpg" alt="Dining Atmosphere" class="gallery__strip-img" loading="lazy">
-                    <div class="gallery__strip-overlay">
-                        <h3 class="gallery__strip-title">Dining Atmosphere</h3>
-                    </div>
-                </div>
-                <div class="gallery__strip">
-                    <img src="images/gallery-6.jpg" alt="Garlic Bread" class="gallery__strip-img" loading="lazy">
-                    <div class="gallery__strip-overlay">
-                        <h3 class="gallery__strip-title">Garlic Bread</h3>
-                    </div>
-                </div>
+
+            <!-- Dietary Filter Chips -->
+            <div class="dietary-filter-bar reveal">
+                <span class="filter-label">Quick Filter:</span>
+                <button class="dietary-chip active" data-dietary="all">All</button>
+                <button class="dietary-chip" data-dietary="jain">🧅 No Onion Garlic</button>
+                <button class="dietary-chip" data-dietary="spicy">🌶️ Spicy</button>
+                <button class="dietary-chip" data-dietary="gf">🌾 Gluten-Free Option</button>
+            </div>
+
+            <!-- Menu Items Grid -->
+            <div class="menu-grid reveal" id="menuGrid">
+                <!-- Dynamically rendered menu cards -->
             </div>
         </div>
     </section>
 
     <!-- ========== WHY CHOOSE US ========== -->
-    <section class="features" id="features">
+    <section class="why-us" id="why-us">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-tag">Why Forno Rosso</span>
-                <h2 class="section-title">The Forno Rosso Difference</h2>
-                <p class="section-subtitle">What sets our artisan pizzas apart from ordinary pizza places.</p>
+                <span class="section-tag">Unmatched Quality</span>
+                <h2 class="section-title">Why Choose Forno Rosso</h2>
+                <p class="section-subtitle">What sets our pure vegetarian artisan pizzas apart from ordinary food joints.</p>
             </div>
-            <div class="features__grid">
-                <div class="feature-card reveal">
-                    <div class="feature-card__icon">
-                        <i class="fa-solid fa-wheat-awn"></i>
-                    </div>
-                    <h3 class="feature-card__title">Artisan Ingredients</h3>
-                    <p class="feature-card__text">Only the finest imported Italian tomatoes, cheeses, and cold-pressed oils.</p>
+
+            <div class="why-us__grid">
+                <div class="why-card reveal">
+                    <div class="why-card__icon"><i class="fa-solid fa-leaf"></i></div>
+                    <h3>100% Pure Veg</h3>
+                    <p>Dedicated vegetarian kitchen with zero meat products or cross-contamination.</p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-card__icon">
-                        <i class="fa-solid fa-seedling"></i>
-                    </div>
-                    <h3 class="feature-card__title">No Preservatives</h3>
-                    <p class="feature-card__text">100% natural, fresh ingredients prepared daily in our kitchen.</p>
+                <div class="why-card reveal">
+                    <div class="why-card__icon"><i class="fa-solid fa-fire"></i></div>
+                    <h3>Stone Oven Baked</h3>
+                    <p>Authentic 900°F volcanic stone baking for perfect bubbly crust and smoky taste.</p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-card__icon">
-                        <i class="fa-solid fa-truck-fast"></i>
-                    </div>
-                    <h3 class="feature-card__title">30-Min Delivery</h3>
-                    <p class="feature-card__text">Piping hot pizza delivered to your door in 30 minutes or it's free.</p>
+                <div class="why-card reveal">
+                    <div class="why-card__icon"><i class="fa-solid fa-carrot"></i></div>
+                    <h3>Farm Fresh Produce</h3>
+                    <p>100% organic, handpicked vegetables delivered fresh every morning.</p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-card__icon">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                    <h3 class="feature-card__title">Made with Love</h3>
-                    <p class="feature-card__text">Every crust is hand-stretched with care by master pizzaiolos.</p>
+                <div class="why-card reveal">
+                    <div class="why-card__icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3>Fast 30-Min Delivery</h3>
+                    <p>Piping hot pizza delivered right to your doorstep in insulated thermal bags.</p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-card__icon">
-                        <i class="fa-solid fa-award"></i>
-                    </div>
-                    <h3 class="feature-card__title">5-Star Rated</h3>
-                    <p class="feature-card__text">Consistently rated the best pizzeria by food critics and customers.</p>
+                <div class="why-card reveal">
+                    <div class="why-card__icon"><i class="fa-solid fa-shield-virus"></i></div>
+                    <h3>Hygienic Kitchen</h3>
+                    <p>Strict safety standards, UV sanitized preparation surfaces, and trained chefs.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-card__icon"><i class="fa-solid fa-tag"></i></div>
+                    <h3>Affordable Luxury</h3>
+                    <p>Premium gourmet artisan quality priced accessibly for everyday family meals.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========== REVIEWS SECTION ========== -->
-    <section class="reviews" id="reviews">
+    <!-- ========== MASONRY GALLERY WITH LIGHTBOX ========== -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Visual Delight</span>
+                <h2 class="section-title">Our Food Gallery</h2>
+                <p class="section-subtitle">Click any image to open in high-resolution lightbox view.</p>
+            </div>
+
+            <div class="masonry-gallery reveal" id="masonryGallery">
+                <div class="gallery-item" data-index="0">
+                    <img src="images/hero-pizza.jpg" alt="Artisan Wood Fired Pizza" loading="lazy">
+                    <div class="gallery-item__overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <h4>Wood Fired Neapolitan</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="1">
+                    <img src="images/pizza-margherita.jpg" alt="Fresh Basil Margherita" loading="lazy">
+                    <div class="gallery-item__overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <h4>Fresh Basil Margherita</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="2">
+                    <img src="images/gallery-1.jpg" alt="Handcrafted Sourdough Dough" loading="lazy">
+                    <div class="gallery-item__overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <h4>Handcrafted Sourdough</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="3">
+                    <img src="images/gallery-2.jpg" alt="Stone Oven Cooking" loading="lazy">
+                    <div class="gallery-item__overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <h4>900°F Stone Oven</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="4">
+                    <img src="images/pizza-veggie.jpg" alt="Garden Veggie Supreme" loading="lazy">
+                    <div class="gallery-item__overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <h4>Farmhouse Veggie Supreme</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="5">
+                    <img src="images/pizza-four-cheese.jpg" alt="Four Cheese Blend" loading="lazy">
+                    <div class="gallery-item__overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <h4>Quattro Formaggi</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CUSTOMER REVIEWS ========== -->
+    <section class="reviews-section" id="reviews">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag">Testimonials</span>
-                <h2 class="section-title">What Our Guests Say</h2>
-                <p class="section-subtitle">Real reviews from our valued pizza lovers.</p>
+                <h2 class="section-title">What Our Veg Guests Say</h2>
+                <p class="section-subtitle">Real feedback from verified pizza lovers.</p>
             </div>
-            <div class="reviews__grid reveal" id="reviewsGrid">
-                <!-- Testimonials rendered dynamically as vertical grid by JS -->
+
+            <div class="reviews-grid reveal" id="reviewsGrid">
+                <!-- Testimonial cards rendered dynamically by JS -->
             </div>
         </div>
     </section>
 
-    <!-- ========== CONTACT SECTION ========== -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Get in Touch</span>
-                <h2 class="section-title">Visit Us or Order Online</h2>
-                <p class="section-subtitle">Have questions or want to make a reservation? Reach out to us.</p>
-            </div>
-            <div class="contact__grid">
-                <div class="contact__form-wrapper reveal">
-                    <form class="contact__form" id="contactForm">
-                        <div class="form-group">
-                            <label for="contactName" class="form-label">Full Name</label>
-                            <input type="text" id="contactName" class="form-input" placeholder="John Doe" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="contactEmail" class="form-label">Email Address</label>
-                            <input type="email" id="contactEmail" class="form-input" placeholder="john@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="contactMessage" class="form-label">Message</label>
-                            <textarea id="contactMessage" class="form-input form-textarea" rows="4" placeholder="Tell us what you're looking for..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary btn--lg btn--full">
-                            <i class="fa-solid fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
-                </div>
-                <div class="contact__info reveal">
-                    <div class="contact__info-card">
-                        <div class="contact__info-item">
-                            <div class="contact__info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                            <div>
-                                <h4>Our Address</h4>
-                                <p>42 Via Roma, Connaught Place<br>New Delhi, India 110001</p>
-                            </div>
-                        </div>
-                        <div class="contact__info-item">
-                            <div class="contact__info-icon"><i class="fa-solid fa-phone"></i></div>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+91 98765 43210<br>+91 11 2345 6789</p>
-                            </div>
-                        </div>
-                        <div class="contact__info-item">
-                            <div class="contact__info-icon"><i class="fa-solid fa-envelope"></i></div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>hello@fornorosso.com<br>orders@fornorosso.com</p>
-                            </div>
-                        </div>
-                        <div class="contact__info-item">
-                            <div class="contact__info-icon"><i class="fa-solid fa-clock"></i></div>
-                            <div>
-                                <h4>Hours</h4>
-                                <p>Mon-Fri: 11:00 AM - 11:00 PM<br>Sat-Sun: 10:00 AM - 12:00 AM</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact__map">
-                        <div class="contact__map-placeholder">
-                            <i class="fa-solid fa-map-location-dot" style="font-size: 2rem; color: var(--color-third); margin-bottom: 4px;"></i>
-                            <p>Interactive Map</p>
-                            <span>42 Via Roma, Connaught Place, New Delhi</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Connaught+Place+New+Delhi+India" target="_blank" rel="noopener noreferrer" class="contact__map-link">
-                                <i class="fa-solid fa-diamond-turn-right"></i> Open in Google Maps
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- ========== CALL TO ACTION (CTA) BANNER ========== -->
+    <section class="cta-banner">
+        <div class="cta-banner__overlay"></div>
+        <div class="container cta-banner__content reveal">
+            <span class="cta-tag">🌱 Fresh & Pure</span>
+            <h2 class="cta-title">Hungry Yet?</h2>
+            <p class="cta-subtitle">Freshly baked 100% pure vegetarian happiness is just one click away.</p>
+            <a href="#menu" class="btn btn--primary btn--hero glow-effect">
+                <i class="fa-solid fa-bag-shopping"></i> Order Online Now
+            </a>
         </div>
     </section>
 
     <!-- ========== FOOTER ========== -->
-    <footer class="footer">
+    <footer class="footer" id="contact">
         <div class="container">
-            <div class="footer__top">
-                <div>
+            <div class="footer__grid">
+                <!-- Brand Info -->
+                <div class="footer__col">
                     <a href="#hero" class="footer__logo">
-                        <span class="navbar__logo-text">forno rosso.</span>
+                        <span class="navbar__logo-badge">🌱 PURE VEG</span>
+                        <span class="navbar__logo-title">forno rosso.</span>
                     </a>
-                    <p class="footer__tagline">Crafting authentic Italian wood-fired pizzas with passion and premium ingredients since 2011.</p>
-                    <div class="footer__social">
-                        <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="footer__social-link" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <p class="footer__desc">
+                        Crafting authentic 100% pure vegetarian wood-fired pizzas with organic ingredients and traditional Neapolitan passion since 2011.
+                    </p>
+                    <div class="footer__socials">
+                        <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon" aria-label="X Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
-                <div>
-                    <h4 class="footer__links-title">Quick Links</h4>
+
+                <!-- Quick Links -->
+                <div class="footer__col">
+                    <h4 class="footer__title">Quick Links</h4>
                     <ul class="footer__links">
                         <li><a href="#hero">Home</a></li>
+                        <li><a href="#veg-promise">Pure Veg Promise</a></li>
                         <li><a href="#offers">Special Offers</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#menu">Our Menu</a></li>
+                        <li><a href="#story">Our Story</a></li>
+                        <li><a href="#menu">Full Menu</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="footer__links-title">Support</h4>
-                    <ul class="footer__links">
-                        <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="#reviews">Reviews</a></li>
-                        <li><a href="#reservation">Reservations</a></li>
-                        <li><a href="#">FAQ</a></li>
+
+                <!-- Working Hours & Contact -->
+                <div class="footer__col">
+                    <h4 class="footer__title">Hours & Contact</h4>
+                    <ul class="footer__info-list">
+                        <li><i class="fa-solid fa-clock"></i> Mon-Fri: 11:00 AM - 11:00 PM</li>
+                        <li><i class="fa-solid fa-clock"></i> Sat-Sun: 10:00 AM - 12:00 AM</li>
+                        <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fa-solid fa-envelope"></i> hello@fornorossoveg.com</li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="footer__links-title">Opening Hours</h4>
-                    <ul class="footer__links">
-                        <li>Mon - Fri: 11am - 11pm</li>
-                        <li>Sat - Sun: 10am - 12am</li>
-                    </ul>
+
+                <!-- Location & Google Map Link -->
+                <div class="footer__col">
+                    <h4 class="footer__title">Visit Our Kitchen</h4>
+                    <p class="footer__address"><i class="fa-solid fa-location-dot"></i> 42 Via Roma, Connaught Place, New Delhi 110001</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Connaught+Place+New+Delhi+India" target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--sm btn--map">
+                        <i class="fa-solid fa-diamond-turn-right"></i> Open in Google Maps
+                    </a>
+
+                    <!-- Newsletter Form -->
+                    <form class="newsletter-form" id="newsletterForm">
+                        <p class="newsletter-label">Subscribe for secret coupons:</p>
+                        <div class="newsletter-input-group">
+                            <input type="email" placeholder="Your email..." required class="newsletter-input">
+                            <button type="submit" class="newsletter-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
+
             <div class="footer__bottom">
-                <p>&copy; 2026 Forno Rosso. All rights reserved.</p>
+                <p>&copy; 2026 Forno Rosso Pure Veg Pizzeria. All rights reserved.</p>
                 <div class="footer__bottom-links">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
+                    <a href="#" id="openAdminFooterLink">Owner Login</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Gallery Lightbox Modal -->
-    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
-        <div class="lightbox__overlay"></div>
+    <!-- ========== LIGHTBOX MODAL ========== -->
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
+        <div class="lightbox__overlay" id="lightboxOverlay"></div>
         <div class="lightbox__content">
-            <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
+            <button class="lightbox__close" id="lightboxClose" aria-label="Close Lightbox">&times;</button>
             <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
-            <img class="lightbox__img" id="lightboxImg" src="" alt="Gallery image">
+            <img src="" alt="Gallery Preview" class="lightbox__img" id="lightboxImg">
             <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
             <p class="lightbox__caption" id="lightboxCaption"></p>
         </div>
     </div>
 
-    <!-- Floating Cart Bar -->
+    <!-- ========== CART DRAWER ========== -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer__header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Your Pure Veg Cart</h3>
+            <button class="cart-drawer__close" id="closeCartBtn">&times;</button>
+        </div>
+        <div class="cart-drawer__items" id="cartItemsList">
+            <!-- Rendered dynamically -->
+        </div>
+        <div class="cart-drawer__footer">
+            <div class="cart-summary-line">
+                <span>Subtotal</span>
+                <span>₹<span id="cartSubtotal">0</span></span>
+            </div>
+            <div class="cart-summary-line">
+                <span>Taxes & Packaging (5%)</span>
+                <span>₹<span id="cartTaxes">0</span></span>
+            </div>
+            <div class="cart-summary-line cart-summary-line--total">
+                <span>Total Amount</span>
+                <span>₹<span id="cartGrandTotal">0</span></span>
+            </div>
+            <button class="btn btn--primary btn--full" id="checkoutBtn"><i class="fa-solid fa-check"></i> Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- ========== STICKY FLOATING CART BAR ========== -->
     <div class="cart-bar" id="cartBar" aria-hidden="true">
         <div class="cart-bar__inner">
             <div class="cart-bar__info">
                 <i class="fa-solid fa-bag-shopping"></i>
-                <span class="cart-bar__count" id="cartCount">0</span> items
+                <span class="cart-bar__count" id="cartBarCount">0</span> items
                 <span class="cart-bar__divider">|</span>
-                <span class="cart-bar__total">₹<span id="cartTotal">0</span></span>
+                <span class="cart-bar__total">₹<span id="cartBarTotal">0</span></span>
             </div>
-            <button class="cart-bar__checkout" id="cartCheckout"><i class="fa-solid fa-arrow-right"></i> Checkout</button>
+            <button class="cart-bar__checkout" id="cartBarOpenDrawer"><i class="fa-solid fa-arrow-right"></i> View Cart & Checkout</button>
         </div>
     </div>
 
-    <!-- Toast Notifications Container -->
+    <!-- ========== OWNER ADMIN DASHBOARD MODAL ========== -->
+    <div class="admin-modal-overlay" id="adminModalOverlay"></div>
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-modal__header">
+            <div class="admin-modal__title">
+                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                    <h3>Owner Special Offers Dashboard</h3>
+                    <p>Create, edit, feature, and manage real-time deals</p>
+                </div>
+            </div>
+            <button class="admin-modal__close" id="closeAdminBtn">&times;</button>
+        </div>
+
+        <div class="admin-modal__body">
+            <!-- Analytics Summary Bar -->
+            <div class="admin-stats-grid">
+                <div class="stat-card">
+                    <span class="stat-card__number" id="statActive">0</span>
+                    <span class="stat-card__label">Active Offers</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__number" id="statClaims">1,248</span>
+                    <span class="stat-card__label">Total Claims</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__number" id="statViews">8,420</span>
+                    <span class="stat-card__label">Offer Views</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__number" id="statExpired">0</span>
+                    <span class="stat-card__label">Expired Archive</span>
+                </div>
+            </div>
+
+            <!-- Create / Edit Offer Form -->
+            <div class="admin-form-card">
+                <h4 id="adminFormTitle"><i class="fa-solid fa-plus-circle"></i> Create New Special Offer</h4>
+                <form id="offerAdminForm" class="admin-form">
+                    <input type="hidden" id="editOfferId" value="">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="offerTitle">Offer Title *</label>
+                            <input type="text" id="offerTitle" class="form-input" placeholder="e.g. Weekend Veggie Feast" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="offerBadge">Badge Category *</label>
+                            <select id="offerBadge" class="form-select" required>
+                                <option value="Today's Special">🔥 Today's Special</option>
+                                <option value="Weekend Offer">🎉 Weekend Offer</option>
+                                <option value="Limited Time">⏳ Limited Time</option>
+                                <option value="Festival Offer">🪔 Festival Offer</option>
+                                <option value="New Launch">✨ New Launch</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="offerOriginalPrice">Original Price (₹) *</label>
+                            <input type="number" id="offerOriginalPrice" class="form-input" placeholder="1199" required min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="offerPrice">Offer Price (₹) *</label>
+                            <input type="number" id="offerPrice" class="form-input" placeholder="699" required min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="offerCoupon">Coupon Code *</label>
+                            <input type="text" id="offerCoupon" class="form-input" placeholder="VEGFEAST50" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerDesc">Short Description *</label>
+                        <input type="text" id="offerDesc" class="form-input" placeholder="Buy 1 Large Gourmet Veg Pizza & Get Garlic Breadstix Free" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="offerEndDate">Expiry Date & Time *</label>
+                            <input type="datetime-local" id="offerEndDate" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="offerImage">Banner Image URL / Preset *</label>
+                            <select id="offerImagePreset" class="form-select">
+                                <option value="images/hero-pizza.jpg">Hero Woodfired Pizza</option>
+                                <option value="images/pizza-margherita.jpg">Margherita Supreme</option>
+                                <option value="images/pizza-veggie.jpg">Farmhouse Veggie</option>
+                                <option value="images/pizza-four-cheese.jpg">Quattro Formaggi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="offerIsFeatured">
+                            <span>⭐ Set as Featured Hero Offer (Appears large at top of Offer Wall)</span>
+                        </label>
+                    </div>
+
+                    <div class="admin-form-actions">
+                        <button type="submit" class="btn btn--primary" id="saveOfferBtn"><i class="fa-solid fa-floppy-disk"></i> Save & Publish Deal</button>
+                        <button type="button" class="btn btn--outline" id="resetAdminFormBtn">Cancel / Reset</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Existing Offers Manage Table -->
+            <div class="admin-table-card">
+                <h4><i class="fa-solid fa-list-check"></i> Manage Current Offers</h4>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Offer Title</th>
+                                <th>Category Badge</th>
+                                <th>Pricing</th>
+                                <th>Coupon</th>
+                                <th>Expiry</th>
+                                <th>Featured</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminOffersTableBody">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== TOAST NOTIFICATION CONTAINER ========== -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to Top">↑</button>
 
     <!-- JavaScript -->
     <script src="app.js"></script>

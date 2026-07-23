@@ -4,253 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Forno Rosso — Admin Dashboard</title>
+    <title>Forno Rosso — Pure Veg Admin Portal</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QX4TctnWMn1TE82KOxbRE3e40+99Inw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="admin-body">
-    <!-- ========== LOGIN SCREEN ========== -->
-    <div class="admin-login" id="adminLogin">
-        <div class="admin-login__card">
-            <div class="admin-login__header">
-                <span class="navbar__logo-icon" style="font-size: 3rem;">🍕</span>
-                <h1>forno rosso.</h1>
-                <p>Admin Dashboard</p>
-            </div>
-            <form class="admin-login__form" id="loginForm">
-                <div class="form-group">
-                    <label for="adminUsername" class="form-label">Username</label>
-                    <input type="text" id="adminUsername" class="form-input" placeholder="admin" required>
-                </div>
-                <div class="form-group">
-                    <label for="adminPassword" class="form-label">Password</label>
-                    <input type="password" id="adminPassword" class="form-input" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn btn--primary btn--lg btn--full">
-                    Sign In
-                </button>
-                <p class="admin-login__hint">Default: admin / admin123</p>
-            </form>
+<body style="background: var(--bg-warm); padding: 40px 20px;">
+
+    <div class="container" style="max-width: 600px; margin: 60px auto; text-align: center; background: var(--bg-card); padding: 40px; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-lg);">
+        <span style="font-size: 3rem;">🌱</span>
+        <h2 style="font-family: var(--ff-heading); color: var(--color-primary); margin-top: 10px;">Forno Rosso Pure Veg</h2>
+        <p style="color: var(--text-muted); margin-bottom: 24px;">Owner & Chef Management Portal</p>
+
+        <div style="background: var(--bg-warm); padding: 20px; border-radius: var(--radius-md); text-align: left; margin-bottom: 28px; font-size: 0.9rem;">
+            <p><strong><i class="fa-solid fa-circle-check" style="color: var(--color-secondary);"></i> Integrated Dashboard Enabled:</strong></p>
+            <p style="margin-top: 6px; color: var(--text-muted);">Special offers management and real-time deal creation are now integrated directly on the main website via the top header shield icon or bottom footer link!</p>
         </div>
+
+        <a href="index.html#offers" class="btn btn--primary btn--lg btn--full">
+            <i class="fa-solid fa-arrow-left"></i> Return to Homepage & Open Owner Dashboard
+        </a>
     </div>
 
-    <!-- ========== ADMIN DASHBOARD ========== -->
-    <div class="admin" id="adminDashboard" style="display: none;">
-        <!-- Sidebar -->
-        <aside class="admin__sidebar" id="adminSidebar">
-            <div class="admin__sidebar-header">
-                <a href="index.html" class="admin__logo">
-                    <span>🍕</span>
-                    <span class="admin__logo-text">forno rosso.</span>
-                </a>
-            </div>
-            <nav class="admin__nav">
-                <a href="#" class="admin__nav-item active" data-section="dashboard">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="admin__nav-item" data-section="offers">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-                    <span>Manage Offers</span>
-                </a>
-                <a href="index.html" class="admin__nav-item">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    <span>View Website</span>
-                </a>
-            </nav>
-            <div class="admin__sidebar-footer">
-                <button class="admin__logout-btn" id="logoutBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                    <span>Sign Out</span>
-                </button>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="admin__main">
-            <!-- Topbar -->
-            <header class="admin__topbar">
-                <button class="admin__menu-toggle" id="adminMenuToggle" aria-label="Toggle sidebar">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-                </button>
-                <h2 class="admin__page-title" id="adminPageTitle">Offers Management</h2>
-                <div class="admin__user">
-                    <div class="admin__user-avatar">A</div>
-                    <span class="admin__user-name">Admin</span>
-                </div>
-            </header>
-
-            <!-- Dashboard Content Section -->
-            <div class="admin__section" id="sectionDashboard">
-                <div class="admin__stats">
-                    <div class="admin__stat-card admin__stat-card--primary">
-                        <div class="admin__stat-icon">🏷️</div>
-                        <div>
-                            <span class="admin__stat-number" id="statTotal">0</span>
-                            <span class="admin__stat-label">Total Offers</span>
-                        </div>
-                    </div>
-                    <div class="admin__stat-card admin__stat-card--success">
-                        <div class="admin__stat-icon">✅</div>
-                        <div>
-                            <span class="admin__stat-number" id="statActive">0</span>
-                            <span class="admin__stat-label">Active Offers</span>
-                        </div>
-                    </div>
-                    <div class="admin__stat-card admin__stat-card--warning">
-                        <div class="admin__stat-icon">⏳</div>
-                        <div>
-                            <span class="admin__stat-number" id="statExpiring">0</span>
-                            <span class="admin__stat-label">Expiring Soon (&lt;6h)</span>
-                        </div>
-                    </div>
-                    <div class="admin__stat-card admin__stat-card--danger">
-                        <div class="admin__stat-icon">❌</div>
-                        <div>
-                            <span class="admin__stat-number" id="statExpired">0</span>
-                            <span class="admin__stat-label">Expired Offers</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="admin__section-header">
-                    <h3>Active Special Offers</h3>
-                    <button class="btn btn--primary btn--sm" id="btnOpenAddModal">
-                        + Create New Offer
-                    </button>
-                </div>
-
-                <!-- Offers Table -->
-                <div class="admin__table-wrapper">
-                    <table class="admin__table">
-                        <thead>
-                            <tr>
-                                <th>Offer Details</th>
-                                <th>Category</th>
-                                <th>Pricing</th>
-                                <th>Discount</th>
-                                <th>Status</th>
-                                <th>End Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="offersTableBody">
-                            <!-- Populated dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- ========== ADD/EDIT OFFER MODAL ========== -->
-    <div class="modal-overlay" id="offerModal" aria-hidden="true">
-        <div class="modal">
-            <div class="modal__header">
-                <h3 id="modalTitle">Add New Special Offer</h3>
-                <button class="modal__close" id="btnCloseModal">&times;</button>
-            </div>
-            <form class="modal__form" id="offerForm">
-                <input type="hidden" id="offerId">
-
-                <div class="form-group">
-                    <label for="offerTitleInput" class="form-label">Offer Title *</label>
-                    <input type="text" id="offerTitleInput" class="form-input" placeholder="e.g. Weekend Pizza Feast" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="offerDescInput" class="form-label">Description *</label>
-                    <textarea id="offerDescInput" class="form-input form-textarea" rows="2" placeholder="e.g. 2 Large Pizzas + Garlic Bread + Coke" required></textarea>
-                </div>
-
-                <div class="modal__form-grid">
-                    <div class="form-group">
-                        <label for="offerOriginalPrice" class="form-label">Original Price (₹) *</label>
-                        <input type="number" id="offerOriginalPrice" class="form-input" placeholder="1499" min="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="offerPriceInput" class="form-label">Offer Price (₹) *</label>
-                        <input type="number" id="offerPriceInput" class="form-input" placeholder="999" min="1" required>
-                    </div>
-                </div>
-
-                <div class="modal__form-grid">
-                    <div class="form-group">
-                        <label for="offerDiscountInput" class="form-label">Discount (%)</label>
-                        <input type="number" id="offerDiscountInput" class="form-input" placeholder="Auto-calculated" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="offerCategoryInput" class="form-label">Category *</label>
-                        <select id="offerCategoryInput" class="form-input" required>
-                            <option value="combo">Combo Deal</option>
-                            <option value="single">Single Pizza</option>
-                            <option value="family">Family Feast</option>
-                            <option value="special">Special Event</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="modal__form-grid">
-                    <div class="form-group">
-                        <label for="offerStartDate" class="form-label">Start Date & Time *</label>
-                        <input type="datetime-local" id="offerStartDate" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="offerEndDate" class="form-label">End Date & Time *</label>
-                        <input type="datetime-local" id="offerEndDate" class="form-input" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Offer Image *</label>
-                    <div class="form-file-upload" id="fileDropZone">
-                        <input type="file" id="offerImageInput" class="form-file-input" accept="image/*">
-                        <div class="form-file-placeholder" id="filePlaceholder">
-                            <p>📸 Click or drag & drop image here</p>
-                            <span>PNG, JPG, WEBP (Max 2MB)</span>
-                        </div>
-                        <img src="" id="filePreview" class="form-file-preview" style="display: none;" alt="Preview">
-                    </div>
-                </div>
-
-                <div class="form-group form-group--toggle">
-                    <label class="toggle">
-                        <input type="checkbox" id="offerIsActive" checked>
-                        <span class="toggle__slider"></span>
-                        <span class="toggle__label">Offer Active</span>
-                    </label>
-                </div>
-
-                <div class="modal__actions">
-                    <button type="button" class="btn btn--outline btn--sm" id="btnCancelModal">Cancel</button>
-                    <button type="submit" class="btn btn--primary btn--sm" id="btnSaveOffer">Save Offer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ========== DELETE CONFIRMATION MODAL ========== -->
-    <div class="modal-overlay" id="deleteModal" aria-hidden="true">
-        <div class="modal modal--sm">
-            <div class="modal__header">
-                <h3>Delete Offer</h3>
-                <button class="modal__close" id="btnCloseDeleteModal">&times;</button>
-            </div>
-            <div class="modal__body">
-                <p>Are you sure you want to delete <strong id="deleteOfferTitle"></strong>? This action cannot be undone.</p>
-            </div>
-            <div class="modal__actions">
-                <button class="btn btn--outline btn--sm" id="btnCancelDelete">Cancel</button>
-                <button class="btn btn--danger btn--sm" id="btnConfirmDelete">Delete</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- JavaScript -->
-    <script src="admin.js"></script>
 </body>
 </html>
