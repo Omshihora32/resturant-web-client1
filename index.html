@@ -115,36 +115,36 @@
                         Forno Rosso brings the authentic taste of Naples to your table. Explore our timeline of culinary craftsmanship below.
                     </p>
 
-                    <!-- Story Timeline Animation -->
+                    <!-- Story Timeline Interactive Tabs (Compact Horizontal Layout) -->
                     <div class="story-timeline" id="storyTimeline">
-                        <div class="story-timeline__progress" id="timelineProgress"></div>
-
-                        <div class="timeline-node">
-                            <div class="timeline-node__dot"></div>
-                            <span class="timeline-node__year">2011</span>
-                            <h4 class="timeline-node__title">The Beginning in Naples</h4>
-                            <p class="timeline-node__desc">Started with a single traditional wood-fired stone oven and a family recipe passed down through generations.</p>
+                        <div class="timeline-tabs" id="timelineTabs">
+                            <button class="timeline-tab active" data-year="2011">2011</button>
+                            <button class="timeline-tab" data-year="2015">2015</button>
+                            <button class="timeline-tab" data-year="2019">2019</button>
+                            <button class="timeline-tab" data-year="2026">2026</button>
                         </div>
 
-                        <div class="timeline-node">
-                            <div class="timeline-node__dot"></div>
-                            <span class="timeline-node__year">2015</span>
-                            <h4 class="timeline-node__title">48-Hour Fermentation Mastery</h4>
-                            <p class="timeline-node__desc">Perfected our signature sourdough dough fermentation technique for maximum digestability and crispness.</p>
-                        </div>
-
-                        <div class="timeline-node">
-                            <div class="timeline-node__dot"></div>
-                            <span class="timeline-node__year">2019</span>
-                            <h4 class="timeline-node__title">Flagship Restaurant Opening</h4>
-                            <p class="timeline-node__desc">Opened our flagship dining space bringing genuine Italian imports, volcanic soil tomatoes, and fresh mozzarella.</p>
-                        </div>
-
-                        <div class="timeline-node">
-                            <div class="timeline-node__dot"></div>
-                            <span class="timeline-node__year">2026</span>
-                            <h4 class="timeline-node__title">Awarded #1 Artisan Pizzeria</h4>
-                            <p class="timeline-node__desc">Recognized as the top wood-fired pizzeria, delivering over 50,000 artisan pizzas to happy guests.</p>
+                        <div class="timeline-cards" id="timelineCards">
+                            <div class="timeline-card active" data-year="2011">
+                                <span class="timeline-card__year">2011</span>
+                                <h4 class="timeline-card__title">The Beginning in Naples</h4>
+                                <p class="timeline-card__desc">Started with a single traditional wood-fired stone oven and a family recipe passed down through generations.</p>
+                            </div>
+                            <div class="timeline-card" data-year="2015">
+                                <span class="timeline-card__year">2015</span>
+                                <h4 class="timeline-card__title">48-Hour Fermentation Mastery</h4>
+                                <p class="timeline-card__desc">Perfected our signature sourdough dough fermentation technique for maximum digestability and crispness.</p>
+                            </div>
+                            <div class="timeline-card" data-year="2019">
+                                <span class="timeline-card__year">2019</span>
+                                <h4 class="timeline-card__title">Flagship Restaurant Opening</h4>
+                                <p class="timeline-card__desc">Opened our flagship dining space bringing genuine Italian imports, volcanic soil tomatoes, and fresh mozzarella.</p>
+                            </div>
+                            <div class="timeline-card" data-year="2026">
+                                <span class="timeline-card__year">2026</span>
+                                <h4 class="timeline-card__title">Awarded #1 Artisan Pizzeria</h4>
+                                <p class="timeline-card__desc">Recognized as the top wood-fired pizzeria, delivering over 50,000 artisan pizzas to happy guests.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -160,12 +160,18 @@
                 <h2 class="section-title">Popular Pizzas</h2>
                 <p class="section-subtitle">Every pizza is handcrafted to order and baked in our wood-fired oven.</p>
             </div>
-            <div class="menu__filters" id="menuFilters">
-                <button class="menu__filter-pill active" data-filter="all">All</button>
-                <button class="menu__filter-pill" data-filter="classic">Classic Pizzas</button>
-                <button class="menu__filter-pill" data-filter="gourmet">Gourmet</button>
-                <button class="menu__filter-pill" data-filter="veg">🌱 Vegetarian</button>
-                <button class="menu__filter-pill" data-filter="meat">🥩 Meat Lovers</button>
+            <div class="menu__filters-wrapper">
+                <div class="menu__search">
+                    <i class="fa-solid fa-magnifying-glass menu__search-icon"></i>
+                    <input type="text" id="menuSearchInput" placeholder="Search pizzas by name or ingredient..." class="menu__search-input" aria-label="Search menu items">
+                </div>
+                <div class="menu__filters" id="menuFilters">
+                    <button class="menu__filter-pill active" data-filter="all">All</button>
+                    <button class="menu__filter-pill" data-filter="classic">Classic Pizzas</button>
+                    <button class="menu__filter-pill" data-filter="gourmet">Gourmet</button>
+                    <button class="menu__filter-pill" data-filter="veg">🌱 Vegetarian</button>
+                    <button class="menu__filter-pill" data-filter="meat">🥩 Meat Lovers</button>
+                </div>
             </div>
             <div class="menu__grid" id="menuGrid">
                 <!-- Food cards rendered dynamically by JS -->

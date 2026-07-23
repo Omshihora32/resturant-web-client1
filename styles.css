@@ -2601,3 +2601,138 @@ h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     .hero__cta { padding: 14px 24px; font-size: 0.88rem; }
     .lightbox__content { max-width: 95vw; }
 }
+
+/* ============================================================
+   MENU SEARCH BAR & FILTERS WRAPPER
+   ============================================================ */
+.menu__filters-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    position: sticky;
+    top: var(--nav-height);
+    z-index: 10;
+    background: var(--color-primary);
+    padding: 16px 0;
+}
+
+.menu__search {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+}
+
+.menu__search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.menu__search-input {
+    width: 100%;
+    padding: 12px 20px 12px 48px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid rgba(42, 37, 41, 0.15);
+    background: var(--color-primary);
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    outline: none;
+    transition: all var(--transition);
+}
+
+.menu__search-input:focus {
+    border-color: var(--color-third);
+    box-shadow: 0 0 0 3px rgba(255, 100, 0, 0.15);
+}
+
+/* ============================================================
+   HORIZONTAL COMPACT TIMELINE TABS
+   ============================================================ */
+.story-timeline {
+    margin-top: 32px;
+}
+
+.timeline-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid rgba(42, 37, 41, 0.1);
+    padding-bottom: 12px;
+}
+
+.timeline-tab {
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid transparent;
+    background: transparent;
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.timeline-tab:hover {
+    color: var(--color-third);
+}
+
+.timeline-tab.active {
+    background: var(--color-third);
+    color: var(--color-primary);
+    border-color: var(--color-third);
+}
+
+.timeline-cards {
+    position: relative;
+    min-height: 140px;
+}
+
+.timeline-card {
+    display: none;
+    background: rgba(42, 37, 41, 0.03);
+    border: 1.5px solid rgba(42, 37, 41, 0.12);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    animation: fadeIn 0.4s ease;
+}
+
+.timeline-card.active {
+    display: block;
+}
+
+.timeline-card__year {
+    display: inline-block;
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-third);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.timeline-card__title {
+    font-family: var(--ff-heading);
+    font-size: 1.4rem;
+    color: var(--color-secondary);
+    margin-bottom: 10px;
+}
+
+.timeline-card__desc {
+    font-family: var(--ff-body);
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}

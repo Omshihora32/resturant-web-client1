@@ -154,29 +154,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =====================================================================
-    // 4. STORY TIMELINE ANIMATION (Feature #6)
+    // 4. STORY TIMELINE TABS (Horizontal Compact UX)
     // =====================================================================
-    const storyTimeline = document.getElementById('storyTimeline');
-    const timelineProgress = document.getElementById('timelineProgress');
-    const timelineNodes = document.querySelectorAll('.timeline-node');
+    const timelineTabs = document.querySelectorAll('.timeline-tab');
+    const timelineCards = document.querySelectorAll('.timeline-card');
 
-    if (storyTimeline) {
-        const timelineObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (timelineProgress) timelineProgress.style.height = '100%';
-                    timelineNodes.forEach((node, idx) => {
-                        setTimeout(() => {
-                            node.classList.add('active');
-                        }, idx * 250);
-                    });
-                    timelineObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
+    timelineTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const year = tab.dataset.year;
+            timelineTabs.forEach(t => t.classList.remove('active'));
+            timelineCards.forEach(c => c.classList.remove('active'));
 
-        timelineObserver.observe(storyTimeline);
-    }
+            tab.classList.add('active');
+            const targetCard = document.querySelector(`.timeline-card[data-year="${year}"]`);
+            if (targetCard) targetCard.classList.add('active');
+        });
+    });
 
     // =====================================================================
     // 5. SCROLL REVEAL ANIMATIONS
@@ -375,13 +368,15 @@ document.addEventListener('DOMContentLoaded', () => {
     renderOffers();
 
     // =====================================================================
-    // 7. FOOD CARDS + FILTER + CART
+    // 7. FOOD CARDS + FILTER + SEARCH + CART
     // =====================================================================
     const menuGrid = document.getElementById('menuGrid');
     const cartBar = document.getElementById('cartBar');
     const cartCountEl = document.getElementById('cartCount');
     const cartTotalEl = document.getElementById('cartTotal');
+    const menuSearchInput = document.getElementById('menuSearchInput');
     let cart = [];
+    let activeFilter = 'all';
 
     function getDietaryClass(badge) {
         if (badge.includes('Veg')) return 'food-card__dietary-badge--veg';
@@ -390,9 +385,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return '';
     }
 
-    function renderMenu(filter = 'all') {
+    function renderMenu() {
         if (!menuGrid) return;
-        const filtered = filter === 'all' ? pizzaData : pizzaData.filter(p => p.category === filter);
+        const query = menuSearchInput?.value.trim().toLowerCase() || '';
+
+        const filtered = pizzaData.filter(pizza => {
+            const matchesCategory = activeFilter === 'all' || pizza.category === activeFilter;
+            const matchesSearch = !query || 
+                pizza.name.toLowerCase().includes(query) || 
+                pizza.desc.toLowerCase().includes(query) ||
+                pizza.tags.some(t => t.toLowerCase().includes(query));
+            return matchesCategory && matchesSearch;
+        });
+
+        if (filtered.length === 0) {
+            menuGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px;">
+                    <i class="fa-solid fa-pizza-slice" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 12px;"></i>
+                    <h3 style="font-family: var(--ff-heading); color: var(--color-secondary);">No pizzas found</h3>
+                    <p style="font-family: var(--ff-body); color: var(--text-muted); font-size: 0.9rem;">Try searching for another flavor or clearing your category filter.</p>
+                </div>
+            `;
+            return;
+        }
+
         menuGrid.innerHTML = filtered.map(pizza => `
             <div class="food-card reveal" data-category="${pizza.category}">
                 <div class="food-card__img-wrap">
@@ -438,13 +454,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuGrid) {
         renderMenu();
 
+        // Search input listener
+        if (menuSearchInput) {
+            menuSearchInput.addEventListener('input', () => {
+                renderMenu();
+            });
+        }
+
         // Filter pills
         const filterBtns = document.querySelectorAll('.menu__filter-pill');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                renderMenu(btn.dataset.filter);
+                activeFilter = btn.dataset.filter;
+                renderMenu();
             });
         });
 
